@@ -16,6 +16,8 @@ speaker_note: |
 Let's Talk About Vending Machines
 ===
 
+![image:w:50%](images/vending-machine-1.jpg)
+
 What does a vending machine do?
 
 <!-- incremental_lists: true -->
@@ -90,6 +92,8 @@ speaker_note: |
 The Ancestor of Smart Contracts
 ===
 
+![image:w:30%](images/vending-machine-2.jpg)
+
 <!-- incremental_lists: true -->
 
 - Vending machines have been around since the **1880s**
@@ -151,56 +155,6 @@ speaker_note: |
 
 <!-- end_slide -->
 
-What Makes This Vending Machine Special?
-===
-
-A regular vending machine vs. a smart contract:
-
-<!-- pause -->
-
-<!-- column_layout: [1, 1] -->
-
-<!-- column: 0 -->
-
-**Regular Machine**
-
-- The company owns it
-- They set the prices
-- They can change the rules
-- You trust the operator
-- One location
-
-<!-- column: 1 -->
-
-**Smart Contract**
-
-- Nobody owns the computer
-- Rules are transparent
-- Code can't be secretly changed
-- Trust the code, not a company
-- Available to anyone, anywhere
-
-<!-- reset_layout -->
-
-<!--
-speaker_note: |
-  So what makes a smart contract different from a regular vending machine?
-  A regular machine is owned by a company. They set the prices, they can
-  change the rules, you trust the operator to keep the machine stocked and
-  honest. And it's in one physical location.
-
-  A smart contract flips all of that. Nobody owns the computer it runs on.
-  The rules are transparent, anyone can inspect the code. Nobody can
-  secretly change how it works after it's deployed. You trust the code
-  itself, not a company. And it's available to anyone with an internet
-  connection, anywhere in the world. Same basic pattern as the vending
-  machine, but without the limitations of physical hardware and single
-  owners. Now let's talk about a specific network where these digital
-  vending machines run.
--->
-
-<!-- end_slide -->
-
 The Stellar Network
 ===
 
@@ -218,6 +172,7 @@ The Stellar Network
 
 <!--
 speaker_note: |
+  What does all this mean in the context of us at the Stellar Development Foundation.
   Stellar is a blockchain network founded in 2014. From the start it's been
   focused on real-world financial use cases. Payments, cross-border
   transfers, making financial services accessible to people who don't have
@@ -233,6 +188,8 @@ speaker_note: |
 
 Stellar's Old Vending Machine
 ===
+
+![image:w:30%](images/vending-machine-3.jpg)
 
 <!-- incremental_lists: true -->
 
@@ -266,6 +223,8 @@ speaker_note: |
 
 Soroban: A Programmable Vending Machine
 ===
+
+![image:w:50%](images/vending-machine-4.jpg)
 
 <!-- pause -->
 
@@ -487,39 +446,6 @@ speaker_note: |
   like USDC. Loyalty points. Event tickets. Shares of a company. On
   Stellar, USDC works exactly like this. Circle mints USDC tokens, people
   hold them and transfer them, and you can redeem them for real dollars.
--->
-
-<!-- end_slide -->
-
-Stellar vs Ethereum
-===
-
-<!-- pause -->
-
-|                  | **Stellar (Soroban)** | **Ethereum**          |
-|------------------|-----------------------|-----------------------|
-| **Speed**        | ~5 seconds            | ~12 seconds           |
-| **Cost**         | Fractions of a cent   | $0.50 -- $50+         |
-| **Language**     | Rust                  | Solidity              |
-| **Philosophy**   | Practical, payments   | General purpose       |
-
-<!-- pause -->
-
-Different manufacturers, different strengths -- not better or worse
-
-<!--
-speaker_note: |
-  People always ask how Stellar compares to Ethereum. Think of them as
-  different vending machine manufacturers. Stellar is fast, about 5 seconds
-  per transaction. Ethereum takes about 12. Stellar is cheap, fractions of
-  a cent. Ethereum can cost anywhere from 50 cents to over 50 dollars when
-  the network is busy. Stellar uses Rust, Ethereum uses a language called
-  Solidity. And in terms of philosophy: Stellar has always focused on
-  practical financial use cases, especially payments. Ethereum aims to be
-  more general purpose.
-
-  Neither is better or worse. Different manufacturers, different strengths.
-  You pick the one that fits what you're building.
 -->
 
 <!-- end_slide -->
