@@ -25,7 +25,7 @@ jobs:
         run: cargo install presenterm
 
       - name: Export slides to HTML
-        run: presenterm --export-html slides.md --output _site/index.html
+        run: presenterm --export-html slides.md --output _site/index.html --config-file presenterm-ci.yaml
 
       - uses: actions/upload-pages-artifact@v3
 
