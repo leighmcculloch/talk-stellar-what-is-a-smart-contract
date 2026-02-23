@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Contracts on Stellar — A Lunch &amp; Learn</title>
+
+    <!-- Fonts: DM Sans for body, Space Grotesk for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES (THEME)
+           =========================================== */
+        :root {
+            /* Dark base with warm amber accent — like a vending machine's glow */
+            --bg-primary: #0c0f14;
+            --bg-secondary: #141820;
+            --bg-card: #1a1f2b;
+            --bg-card-border: #262c3a;
+            --text-primary: #f0ece4;
+            --text-secondary: #8a8f9d;
+            --text-dim: #5a5f6d;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --accent-glow: rgba(245, 158, 11, 0.25);
+            --accent-subtle: rgba(245, 158, 11, 0.08);
+            --green: #34d399;
+            --blue: #60a5fa;
+            --purple: #a78bfa;
+            --rose: #fb7185;
+
+            /* Typography */
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --title-size: clamp(2rem, 5.5vw, 4.5rem);
+            --h2-size: clamp(1.5rem, 3.5vw, 2.75rem);
+            --h3-size: clamp(1.1rem, 2.2vw, 1.5rem);
+            --body-size: clamp(0.85rem, 1.4vw, 1.15rem);
+            --small-size: clamp(0.7rem, 1vw, 0.9rem);
+            --mono-size: clamp(0.7rem, 1.1vw, 0.95rem);
+
+            /* Spacing */
+            --slide-padding: clamp(1.5rem, 5vw, 5rem);
+            --content-gap: clamp(0.75rem, 2vw, 2rem);
+            --element-gap: clamp(0.3rem, 1vh, 0.75rem);
+
+            /* Animation */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --duration: 0.7s;
+        }
+
+        /* ===========================================
+           BASE STYLES
+           =========================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            height: 100%;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===========================================
+           SLIDE CONTAINER
+           =========================================== */
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: var(--slide-padding);
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            max-width: min(90vw, 1100px);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* ===========================================
+           BACKGROUNDS
+           =========================================== */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(245, 158, 11, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(96, 165, 250, 0.03) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Subtle grid */
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .slide > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===========================================
+           TYPOGRAPHY
+           =========================================== */
+        h1 {
+            font-family: var(--font-display);
+            font-size: var(--title-size);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: var(--h2-size);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin-bottom: var(--content-gap);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: var(--h3-size);
+            font-weight: 500;
+            line-height: 1.3;
+            color: var(--text-secondary);
+        }
+
+        p {
+            font-size: var(--body-size);
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        em {
+            color: var(--accent-light);
+            font-style: italic;
+        }
+
+        /* ===========================================
+           ACCENT DECORATIONS
+           =========================================== */
+        .accent-line {
+            width: 48px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            margin-bottom: var(--content-gap);
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: clamp(1rem, 3vw, 2rem);
+            right: clamp(1rem, 3vw, 2rem);
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            color: var(--text-dim);
+            z-index: 2;
+        }
+
+        /* ===========================================
+           BULLET LISTS
+           =========================================== */
+        .bullet-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--element-gap);
+        }
+
+        .bullet-list li {
+            font-size: var(--body-size);
+            line-height: 1.5;
+            color: var(--text-secondary);
+            padding-left: 1.6em;
+            position: relative;
+        }
+
+        .bullet-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .bullet-list li strong {
+            color: var(--text-primary);
+        }
+
+        /* ===========================================
+           DIAGRAM BOXES — styled contract/machine visuals
+           =========================================== */
+        .machine-box {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 12px;
+            padding: clamp(1rem, 2vw, 1.75rem);
+            font-family: var(--font-mono);
+            font-size: var(--mono-size);
+            line-height: 1.7;
+            color: var(--text-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .machine-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light), transparent);
+        }
+
+        .machine-box .label {
+            font-family: var(--font-display);
+            font-size: var(--h3-size);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5em;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        .machine-box .label .icon {
+            font-size: 1.2em;
+        }
+
+        .machine-box .detail {
+            color: var(--text-dim);
+        }
+
+        .machine-box .highlight {
+            color: var(--accent-light);
+        }
+
+        /* Event log styling */
+        .event-log {
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 8px;
+            padding: clamp(0.75rem, 1.5vw, 1.25rem);
+            font-family: var(--font-mono);
+            font-size: var(--mono-size);
+            line-height: 1.8;
+        }
+
+        .event-log .event-line {
+            display: flex;
+            gap: 0.75em;
+            align-items: baseline;
+        }
+
+        .event-log .event-tag {
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        .event-log .event-tag.green { color: var(--green); }
+        .event-log .event-tag.blue { color: var(--blue); }
+        .event-log .event-tag.purple { color: var(--purple); }
+        .event-log .event-tag.rose { color: var(--rose); }
+        .event-log .event-tag.amber { color: var(--accent-light); }
+
+        .event-log .event-text {
+            color: var(--text-secondary);
+        }
+
+        /* ===========================================
+           DIAGRAM LAYOUTS
+           =========================================== */
+        .diagram-row {
+            display: flex;
+            gap: clamp(0.75rem, 2vw, 1.5rem);
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .diagram-row .machine-box {
+            flex: 1;
+            min-width: min(100%, 260px);
+            max-width: 380px;
+        }
+
+        .diagram-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25em;
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            flex-shrink: 0;
+        }
+
+        .diagram-connector .arrow {
+            font-size: 1.5em;
+            line-height: 1;
+        }
+
+        /* ===========================================
+           IMAGE SLIDES
+           =========================================== */
+        .slide-image {
+            max-width: 100%;
+            max-height: min(40vh, 350px);
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .image-frame {
+            position: relative;
+            display: inline-block;
+            margin-bottom: var(--content-gap);
+        }
+
+        .image-frame::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 14px;
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            pointer-events: none;
+        }
+
+        /* ===========================================
+           TITLE SLIDE SPECIFIC
+           =========================================== */
+        .title-slide .slide-content {
+            align-items: center;
+            text-align: center;
+            gap: var(--content-gap);
+        }
+
+        .title-tag {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            background: var(--accent-subtle);
+            padding: 0.4em 1.2em;
+            border-radius: 100px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .title-slide h1 {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-slide .subtitle {
+            font-size: clamp(1rem, 2vw, 1.35rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .title-slide .author {
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            color: var(--text-dim);
+            margin-top: clamp(0.5rem, 1vh, 1rem);
+        }
+
+        /* Big centered quote / statement */
+        .big-statement {
+            font-family: var(--font-display);
+            font-size: clamp(1.25rem, 3vw, 2.25rem);
+            font-weight: 500;
+            line-height: 1.4;
+            color: var(--text-primary);
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .big-statement em {
+            color: var(--accent-light);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* ===========================================
+           TIMELINE
+           =========================================== */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: var(--element-gap);
+            padding-left: 1.5em;
+            border-left: 2px solid var(--bg-card-border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 1.5em;
+            font-size: var(--body-size);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5em;
+            top: 0.5em;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--accent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item.active::before {
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .timeline-item .year {
+            font-family: var(--font-mono);
+            font-weight: 500;
+            color: var(--accent-light);
+        }
+
+        /* ===========================================
+           FEATURE CARDS (for Stellar Network slide)
+           =========================================== */
+        .feature-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+            gap: clamp(0.5rem, 1.5vw, 1rem);
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 10px;
+            padding: clamp(0.75rem, 1.5vw, 1.25rem);
+            text-align: center;
+        }
+
+        .feature-card .feature-value {
+            font-family: var(--font-display);
+            font-size: clamp(1.25rem, 2.5vw, 2rem);
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 0.25em;
+        }
+
+        .feature-card .feature-label {
+            font-size: var(--small-size);
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* ===========================================
+           TOKEN BADGE
+           =========================================== */
+        .token-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(0.4rem, 1vw, 0.75rem);
+            margin-top: var(--element-gap);
+        }
+
+        .token-badge {
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            padding: 0.35em 0.9em;
+            border-radius: 100px;
+            border: 1px solid;
+        }
+
+        .token-badge.amber { border-color: rgba(245,158,11,0.3); color: var(--accent-light); background: rgba(245,158,11,0.08); }
+        .token-badge.green { border-color: rgba(52,211,153,0.3); color: var(--green); background: rgba(52,211,153,0.08); }
+        .token-badge.blue { border-color: rgba(96,165,250,0.3); color: var(--blue); background: rgba(96,165,250,0.08); }
+        .token-badge.purple { border-color: rgba(167,139,250,0.3); color: var(--purple); background: rgba(167,139,250,0.08); }
+
+        /* ===========================================
+           QUESTION SLIDE
+           =========================================== */
+        .questions-slide .slide-content {
+            align-items: center;
+            text-align: center;
+            gap: var(--content-gap);
+        }
+
+        .questions-slide h1 {
+            font-size: clamp(2.5rem, 7vw, 6rem);
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===========================================
+           REVEAL ANIMATIONS
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity var(--duration) var(--ease-out-expo),
+                        transform var(--duration) var(--ease-out-expo);
+        }
+
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered children */
+        .slide.visible .reveal:nth-child(1) { transition-delay: 0s; }
+        .slide.visible .reveal:nth-child(2) { transition-delay: 0.1s; }
+        .slide.visible .reveal:nth-child(3) { transition-delay: 0.2s; }
+        .slide.visible .reveal:nth-child(4) { transition-delay: 0.3s; }
+        .slide.visible .reveal:nth-child(5) { transition-delay: 0.4s; }
+        .slide.visible .reveal:nth-child(6) { transition-delay: 0.5s; }
+        .slide.visible .reveal:nth-child(7) { transition-delay: 0.6s; }
+        .slide.visible .reveal:nth-child(8) { transition-delay: 0.7s; }
+
+        /* Scale-in variant */
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity var(--duration) var(--ease-out-expo),
+                        transform var(--duration) var(--ease-out-expo);
+        }
+
+        .slide.visible .reveal-scale {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Glow pulse on visible */
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(245,158,11,0.1); }
+            50% { box-shadow: 0 0 40px rgba(245,158,11,0.2); }
+        }
+
+        .slide.visible .glow-on-visible {
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        /* ===========================================
+           PROGRESS BAR
+           =========================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            z-index: 100;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* ===========================================
+           NAV DOTS
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: clamp(0.5rem, 1.5vw, 1.25rem);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-dim);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .nav-dot:hover {
+            background: var(--text-secondary);
+            transform: scale(1.3);
+        }
+
+        .nav-dot.active {
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* ===========================================
+           KEYBOARD HINT
+           =========================================== */
+        .keyboard-hint {
+            position: fixed;
+            bottom: clamp(0.75rem, 2vw, 1.5rem);
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: clamp(0.6rem, 0.8vw, 0.75rem);
+            color: var(--text-dim);
+            z-index: 100;
+            transition: opacity 0.5s ease;
+        }
+
+        .keyboard-hint.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .keyboard-hint kbd {
+            display: inline-block;
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 4px;
+            padding: 0.15em 0.5em;
+            margin: 0 0.15em;
+            font-family: inherit;
+        }
+
+        /* ===========================================
+           RESPONSIVE BREAKPOINTS
+           =========================================== */
+        @media (max-height: 700px) {
+            :root {
+                --slide-padding: clamp(1rem, 3vw, 2.5rem);
+                --content-gap: clamp(0.5rem, 1.5vw, 1rem);
+                --title-size: clamp(1.75rem, 5vw, 3.5rem);
+                --h2-size: clamp(1.25rem, 3vw, 2rem);
+            }
+            .slide-image { max-height: min(30vh, 250px); }
+        }
+
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 2.5vw, 1.5rem);
+                --content-gap: clamp(0.4rem, 1vw, 0.75rem);
+                --title-size: clamp(1.5rem, 4.5vw, 2.5rem);
+                --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+            }
+            .nav-dots, .keyboard-hint { display: none; }
+        }
+
+        @media (max-height: 500px) {
+            :root {
+                --slide-padding: clamp(0.5rem, 2vw, 1rem);
+                --title-size: clamp(1.25rem, 4vw, 2rem);
+                --h2-size: clamp(1rem, 2.5vw, 1.5rem);
+                --body-size: clamp(0.65rem, 1vw, 0.85rem);
+            }
+        }
+
+        @media (max-width: 600px) {
+            :root {
+                --title-size: clamp(1.5rem, 8vw, 3rem);
+            }
+            .diagram-row { flex-direction: column; }
+            .diagram-connector .arrow { transform: rotate(90deg); }
+            .feature-row { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            html { scroll-behavior: auto; }
+            .reveal, .reveal-scale {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Navigation dots -->
+    <nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+
+    <!-- Keyboard hint -->
+    <div class="keyboard-hint" id="keyboardHint">
+        <kbd>&larr;</kbd> <kbd>&rarr;</kbd> or <kbd>Space</kbd> to navigate
+    </div>
+
+    <!-- ==========================================
+         SLIDE 1: TITLE
+         ========================================== -->
+    <section class="slide title-slide" data-slide="0">
+        <div class="slide-content">
+            <span class="title-tag reveal">Lunch &amp; Learn</span>
+            <h1 class="reveal">Smart Contracts<br>on Stellar</h1>
+            <p class="subtitle reveal">What are they, where did they come from,<br>and what can you build with them?</p>
+            <p class="author reveal">Leigh McCulloch</p>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 2: VENDING MACHINES INTRO
+         ========================================== -->
+    <section class="slide" data-slide="1">
+        <div class="slide-content" style="align-items: center; text-align: center; gap: var(--content-gap);">
+            <h2 class="reveal" style="margin-bottom: 0;">Let's Talk About<br>Vending Machines</h2>
+            <div class="image-frame reveal-scale">
+                <img src="images/vending-machine-1.jpg" alt="A vending machine" class="slide-image">
+            </div>
+            <p class="big-statement reveal" style="font-size: clamp(1rem, 2vw, 1.5rem);">
+                You put in money. You make a selection.<br>
+                The machine checks. It gives you the item.<br>
+                No cashier. No negotiation. The <em>rules enforce themselves</em>.
+            </p>
+        </div>
+        <span class="slide-number">02</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 3: WHY VENDING MACHINES?
+         ========================================== -->
+    <section class="slide" data-slide="2">
+        <div class="slide-content" style="gap: var(--content-gap);">
+            <h2 class="reveal">Why Vending Machines?</h2>
+            <p class="big-statement reveal" style="text-align: left; max-width: none; font-size: clamp(1.1rem, 2.2vw, 1.75rem);">
+                A vending machine is an <em>agreement</em>
+            </p>
+            <p class="reveal" style="font-size: var(--body-size); max-width: 700px;">
+                "If you put in the right amount of money, you will get something out."
+            </p>
+            <ul class="bullet-list" style="margin-top: var(--element-gap);">
+                <li class="reveal">First implemented in <strong>hardware</strong> — gears, springs, coin slots</li>
+                <li class="reveal">Now most vending machines run <strong>software</strong> too</li>
+                <li class="reveal">The first swap program — money in, item out</li>
+                <li class="reveal">No middleman. The machine <strong>is</strong> the agreement</li>
+            </ul>
+        </div>
+        <span class="slide-number">03</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 4: NICK SZABO / ANCESTOR
+         ========================================== -->
+    <section class="slide" data-slide="3">
+        <div class="slide-content" style="gap: var(--content-gap);">
+            <h2 class="reveal">The Ancestor of Smart Contracts</h2>
+            <div style="display: flex; gap: clamp(1rem, 3vw, 2.5rem); align-items: flex-start; flex-wrap: wrap;" class="reveal-scale">
+                <div class="image-frame" style="flex-shrink: 0;">
+                    <img src="images/vending-machine-1880s.jpg" alt="Late 1800s Max Sielaff vending machine from Berlin" class="slide-image" style="max-height: min(30vh, 260px);">
+                </div>
+                <div class="timeline" style="flex: 1; min-width: min(100%, 300px);">
+                    <div class="timeline-item reveal">
+                        <span class="year">1880s</span> — Vending machines appear. Automated agreements, no human in the middle.
+                    </div>
+                    <div class="timeline-item reveal">
+                        <span class="year">1994</span> — Computer scientist <strong>Nick Szabo</strong> sees the connection.
+                    </div>
+                    <div class="timeline-item reveal">
+                        He calls the vending machine the <strong>"ancestor of smart contracts"</strong> and coins the term.
+                    </div>
+                    <div class="timeline-item active reveal">
+                        <span class="year">14 years before Bitcoin.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">04</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 5: WHAT IS A SMART CONTRACT?
+         ========================================== -->
+    <section class="slide" data-slide="4">
+        <div class="slide-content" style="align-items: center; text-align: center; gap: var(--content-gap);">
+            <h2 class="reveal">What Is a Smart Contract?</h2>
+            <div style="display: flex; flex-direction: column; gap: var(--element-gap); max-width: 700px;">
+                <p class="reveal" style="font-size: var(--body-size);">Take the vending machine pattern — an agreement that enforces itself.</p>
+                <p class="reveal" style="font-size: var(--body-size);"><strong>Remove the physical machine.</strong> Just the logic.</p>
+                <p class="reveal" style="font-size: var(--body-size);">Put it on a network of computers that <strong>nobody owns</strong>.</p>
+                <p class="reveal" style="font-size: var(--body-size);">Now anyone, anywhere, can use it.</p>
+            </div>
+            <div class="reveal" style="margin-top: var(--element-gap);">
+                <p class="big-statement">
+                    An agreement that enforces itself,<br>running on a computer <em>nobody controls</em>.
+                </p>
+            </div>
+        </div>
+        <span class="slide-number">05</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 6: THE STELLAR NETWORK
+         ========================================== -->
+    <section class="slide" data-slide="5">
+        <div class="slide-content" style="gap: var(--content-gap);">
+            <h2 class="reveal">The Stellar Network</h2>
+            <p class="reveal" style="max-width: 700px;">
+                A blockchain founded in 2014, focused on <strong>payments</strong> and <strong>financial access</strong>.
+                Think of it as a plaza where vending machines can be deployed.
+            </p>
+            <div class="feature-row reveal">
+                <div class="feature-card">
+                    <div class="feature-value">2014</div>
+                    <div class="feature-label">Founded</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-value">~5s</div>
+                    <div class="feature-label">Settlement</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-value">&lt;$0.01</div>
+                    <div class="feature-label">Per Transaction</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-value">Global</div>
+                    <div class="feature-label">Access</div>
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">06</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 7: STELLAR'S OLD MACHINE
+         ========================================== -->
+    <section class="slide" data-slide="6">
+        <div class="slide-content" style="gap: var(--content-gap);">
+            <h2 class="reveal">Stellar's Old Vending Machine</h2>
+            <div style="display: flex; gap: clamp(1rem, 3vw, 2rem); align-items: center; flex-wrap: wrap;">
+                <div class="image-frame reveal-scale" style="flex-shrink: 0;">
+                    <img src="images/vending-machine-3.jpg" alt="Fixed vending machine" class="slide-image" style="max-height: min(30vh, 240px);">
+                </div>
+                <div style="flex: 1; min-width: min(100%, 280px);">
+                    <ul class="bullet-list">
+                        <li class="reveal"><strong>26 built-in operations</strong> — send payments, create offers, manage trust</li>
+                        <li class="reveal">A built-in decentralized exchange</li>
+                        <li class="reveal">Like a machine with <strong>26 preset buttons</strong></li>
+                        <li class="reveal">Useful — but you couldn't add new buttons</li>
+                        <li class="reveal">Want something not on the menu? <strong>Not possible</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">07</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 8: SOROBAN
+         ========================================== -->
+    <section class="slide" data-slide="7">
+        <div class="slide-content" style="gap: var(--content-gap);">
+            <h2 class="reveal">Soroban: The Programmable Machine</h2>
+            <div style="display: flex; gap: clamp(1rem, 3vw, 2rem); align-items: center; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: min(100%, 280px);">
+                    <div class="reveal" style="margin-bottom: var(--content-gap);">
+                        <span class="title-tag" style="font-size: var(--small-size);">February 2024 — Live on Stellar</span>
+                    </div>
+                    <ul class="bullet-list">
+                        <li class="reveal"><strong>Soroban</strong> — Stellar's smart contract platform</li>
+                        <li class="reveal">Written in <strong>Rust</strong>, compiled to <strong>WebAssembly</strong></li>
+                        <li class="reveal">Anyone can build a <strong>new machine</strong> with custom rules</li>
+                        <li class="reveal">Not just 26 buttons — <strong>unlimited possibilities</strong></li>
+                        <li class="reveal">The old preset buttons still work too</li>
+                    </ul>
+                </div>
+                <div class="image-frame reveal-scale" style="flex-shrink: 0;">
+                    <img src="images/vending-machine-4.jpg" alt="Programmable vending machine" class="slide-image" style="max-height: min(30vh, 240px);">
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">08</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 9: A BASIC SWAP
+         ========================================== -->
+    <section class="slide" data-slide="8">
+        <div class="slide-content" style="gap: var(--content-gap);">
+            <h2 class="reveal">A Basic Swap</h2>
+            <p class="reveal" style="color: var(--text-secondary);">The simplest vending machine: put something in, get something out.</p>
+            <div class="machine-box reveal-scale glow-on-visible">
+                <div class="label"><span class="icon">&#9641;</span> SODA MACHINE</div>
+                <div>Alice inserts <span class="highlight">$2.00</span></div>
+                <div>Alice presses <span class="highlight">B4</span></div>
+                <div>Machine dispenses <span class="highlight">1 Soda</span></div>
+                <div class="detail">Machine returns $0.25 change</div>
+            </div>
+            <div class="event-log reveal" style="margin-top: var(--element-gap);">
+                <div style="font-size: var(--small-size); color: var(--text-dim); margin-bottom: 0.4em; text-transform: uppercase; letter-spacing: 0.1em;">Receipt</div>
+                <div class="event-line"><span class="event-tag green">Event</span> <span class="event-text">received $2.00 from Alice</span></div>
+                <div class="event-line"><span class="event-tag blue">Event</span> <span class="event-text">dispensed 1 Soda to Alice</span></div>
+                <div class="event-line"><span class="event-tag amber">Event</span> <span class="event-text">returned $0.25 to Alice</span></div>
+            </div>
+        </div>
+        <span class="slide-number">09</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 10: TWO MACHINES, ONE SWAP
+         ========================================== -->
+    <section class="slide" data-slide="9">
+        <div class="slide-content" style="gap: var(--content-gap);">
+            <h2 class="reveal">Two Machines, One Swap</h2>
+            <p class="reveal" style="color: var(--text-secondary);">Alice wants to swap USDC for EURC. That takes <strong>two</strong> machines working together.</p>
+            <div class="diagram-row reveal-scale">
+                <div class="machine-box" style="flex: 1;">
+                    <div class="label"><span class="icon">&#9641;</span> USDC MACHINE</div>
+                    <div>Holds <span class="highlight">USDC balances</span></div>
+                </div>
+                <div class="diagram-connector">
+                    <span class="arrow">&harr;</span>
+                    <span>swap</span>
+                </div>
+                <div class="machine-box" style="flex: 1;">
+                    <div class="label"><span class="icon">&#9641;</span> EURC MACHINE</div>
+                    <div>Holds <span class="highlight">EURC balances</span></div>
+                </div>
+            </div>
+            <div class="event-log reveal" style="margin-top: var(--element-gap);">
+                <div style="font-size: var(--small-size); color: var(--text-dim); margin-bottom: 0.4em; text-transform: uppercase; letter-spacing: 0.1em;">Events from three contracts</div>
+                <div class="event-line"><span class="event-tag purple">Swap</span> <span class="event-text">swap 100 USDC for 84.75 EURC for Alice</span></div>
+                <div class="event-line"><span class="event-tag blue">USDC</span> <span class="event-text">transferred 100 USDC from Alice to Pool</span></div>
+                <div class="event-line"><span class="event-tag green">EURC</span> <span class="event-text">transferred 84.75 EURC from Pool to Alice</span></div>
+            </div>
+        </div>
+        <span class="slide-number">10</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 11: LIQUIDITY POOL
+         ========================================== -->
+    <section class="slide" data-slide="10">
+        <div class="slide-content" style="gap: var(--content-gap);">
+            <h2 class="reveal">A Liquidity Pool</h2>
+            <p class="reveal" style="color: var(--text-secondary);">A machine where people <strong>deposit</strong> assets so others can <strong>swap</strong>.</p>
+            <div class="machine-box reveal-scale glow-on-visible">
+                <div class="label"><span class="icon">&#9641;</span> LIQUIDITY POOL</div>
+                <div>Contains: <span class="highlight">10,000 USDC</span> + <span class="highlight">8,475 EURC</span></div>
+                <div class="detail">Depositors earn fees from every swap</div>
+            </div>
+            <div class="event-log reveal" style="margin-top: var(--element-gap);">
+                <div style="font-size: var(--small-size); color: var(--text-dim); margin-bottom: 0.4em; text-transform: uppercase; letter-spacing: 0.1em;">The Story</div>
+                <div class="event-line"><span class="event-tag green">Deposit</span> <span class="event-text">Alice deposited 1,000 USDC + 847 EURC</span></div>
+                <div class="event-line"><span class="event-tag blue">Swap</span> <span class="event-text">Bob swapped 100 USDC for 84.75 EURC (fee: 0.3%)</span></div>
+                <div class="event-line"><span class="event-tag purple">Swap</span> <span class="event-text">Carol swapped 50 EURC for 58.90 USDC (fee: 0.3%)</span></div>
+                <div class="event-line"><span class="event-tag amber">Withdraw</span> <span class="event-text">Alice withdrew 1,041 USDC + 813 EURC + fees</span></div>
+            </div>
+        </div>
+        <span class="slide-number">11</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 12: TOKEN MACHINE
+         ========================================== -->
+    <section class="slide" data-slide="11">
+        <div class="slide-content" style="gap: var(--content-gap);">
+            <h2 class="reveal">A Token Machine</h2>
+            <p class="reveal" style="color: var(--text-secondary);">A machine that <strong>creates</strong> tokens and tracks who holds them.</p>
+            <div class="machine-box reveal-scale glow-on-visible">
+                <div class="label"><span class="icon">&#9641;</span> TOKEN MACHINE</div>
+                <div>Token: <span class="highlight">LOYALTY</span></div>
+                <div>Total supply: <span class="highlight">0</span> <span class="detail">(so far)</span></div>
+                <div class="detail" style="margin-top: 0.5em;">Buttons: mint, transfer, redeem</div>
+            </div>
+            <div class="event-log reveal" style="margin-top: var(--element-gap);">
+                <div class="event-line"><span class="event-tag green">Mint</span> <span class="event-text">minted 1,000 LOYALTY to Alice</span></div>
+                <div class="event-line"><span class="event-tag blue">Transfer</span> <span class="event-text">Alice transferred 200 LOYALTY to Bob</span></div>
+                <div class="event-line"><span class="event-tag rose">Redeem</span> <span class="event-text">Bob redeemed 200 LOYALTY for a reward</span></div>
+            </div>
+            <div class="reveal" style="margin-top: var(--element-gap);">
+                <p style="font-size: var(--small-size); color: var(--text-dim); margin-bottom: 0.4em;">Tokens can represent anything:</p>
+                <div class="token-badges">
+                    <span class="token-badge green">Dollars (USDC)</span>
+                    <span class="token-badge amber">Loyalty Points</span>
+                    <span class="token-badge blue">Event Tickets</span>
+                    <span class="token-badge purple">Shares</span>
+                </div>
+            </div>
+        </div>
+        <span class="slide-number">12</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 13: SUMMARY
+         ========================================== -->
+    <section class="slide" data-slide="12">
+        <div class="slide-content" style="gap: var(--content-gap);">
+            <h2 class="reveal">Vending Machines Everywhere</h2>
+            <ul class="bullet-list">
+                <li class="reveal">A simple vending machine — <strong>money in, soda out</strong></li>
+                <li class="reveal">Two machines working together to <strong>swap currencies</strong></li>
+                <li class="reveal">A pool where people <strong>deposit assets and earn fees</strong></li>
+                <li class="reveal">A machine that <strong>creates tokens from nothing</strong></li>
+            </ul>
+            <div class="reveal" style="margin-top: var(--content-gap);">
+                <p class="big-statement" style="text-align: left; max-width: none; font-size: clamp(1rem, 2vw, 1.5rem);">
+                    Each one is just an <em>agreement that enforces itself</em>.<br>
+                    Open, transparent, no gatekeepers.
+                </p>
+            </div>
+            <p class="reveal" style="font-size: var(--small-size); color: var(--text-dim); margin-top: var(--element-gap);">
+                The same pattern Nick Szabo saw in a vending machine in 1994.
+            </p>
+        </div>
+        <span class="slide-number">13</span>
+    </section>
+
+    <!-- ==========================================
+         SLIDE 14: QUESTIONS
+         ========================================== -->
+    <section class="slide questions-slide" data-slide="13">
+        <div class="slide-content">
+            <h1 class="reveal">Questions?</h1>
+            <p class="reveal" style="color: var(--text-dim); font-size: var(--body-size);">
+                Nothing is too basic. If something didn't make sense, ask about it.
+            </p>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       JAVASCRIPT: Navigation, Animations, Interactions
+       ========================================== -->
+    <script>
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.currentSlide = 0;
+                this.isScrolling = false;
+                this.scrollTimeout = null;
+
+                this.initProgressBar();
+                this.initNavDots();
+                this.initIntersectionObserver();
+                this.initKeyboardNav();
+                this.initTouchNav();
+                this.initWheelNav();
+                this.hideHintAfterDelay();
+                this.restoreFromHash();
+            }
+
+            /* ----- Progress Bar ----- */
+            initProgressBar() {
+                this.progressBar = document.getElementById('progressBar');
+                this.updateProgress();
+            }
+
+            updateProgress() {
+                const progress = ((this.currentSlide + 1) / this.slides.length) * 100;
+                this.progressBar.style.width = progress + '%';
+            }
+
+            /* ----- Navigation Dots ----- */
+            initNavDots() {
+                const nav = document.getElementById('navDots');
+                this.slides.forEach((_, i) => {
+                    const dot = document.createElement('button');
+                    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    nav.appendChild(dot);
+                });
+                this.dots = nav.querySelectorAll('.nav-dot');
+            }
+
+            updateDots() {
+                this.dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === this.currentSlide);
+                });
+            }
+
+            /* ----- Intersection Observer for animations ----- */
+            initIntersectionObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            // Update current slide index
+                            const idx = parseInt(entry.target.dataset.slide);
+                            if (!isNaN(idx)) {
+                                this.currentSlide = idx;
+                                this.updateProgress();
+                                this.updateDots();
+                                this.updateHash();
+                            }
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                this.slides.forEach(slide => observer.observe(slide));
+            }
+
+            /* ----- Keyboard Navigation ----- */
+            initKeyboardNav() {
+                document.addEventListener('keydown', (e) => {
+                    switch (e.key) {
+                        case 'ArrowRight':
+                        case 'ArrowDown':
+                        case ' ':
+                            e.preventDefault();
+                            this.nextSlide();
+                            break;
+                        case 'ArrowLeft':
+                        case 'ArrowUp':
+                            e.preventDefault();
+                            this.prevSlide();
+                            break;
+                        case 'Home':
+                            e.preventDefault();
+                            this.goToSlide(0);
+                            break;
+                        case 'End':
+                            e.preventDefault();
+                            this.goToSlide(this.slides.length - 1);
+                            break;
+                    }
+                });
+            }
+
+            /* ----- Touch / Swipe Navigation ----- */
+            initTouchNav() {
+                let startY = 0;
+                let startX = 0;
+
+                document.addEventListener('touchstart', (e) => {
+                    startY = e.touches[0].clientY;
+                    startX = e.touches[0].clientX;
+                }, { passive: true });
+
+                document.addEventListener('touchend', (e) => {
+                    const dy = startY - e.changedTouches[0].clientY;
+                    const dx = startX - e.changedTouches[0].clientX;
+
+                    // Only respond to vertical swipes longer than 50px
+                    if (Math.abs(dy) > 50 && Math.abs(dy) > Math.abs(dx)) {
+                        if (dy > 0) this.nextSlide();
+                        else this.prevSlide();
+                    }
+                }, { passive: true });
+            }
+
+            /* ----- Wheel Navigation (debounced) ----- */
+            initWheelNav() {
+                document.addEventListener('wheel', (e) => {
+                    if (this.isScrolling) return;
+                    if (Math.abs(e.deltaY) < 30) return;
+
+                    this.isScrolling = true;
+                    if (e.deltaY > 0) this.nextSlide();
+                    else this.prevSlide();
+
+                    clearTimeout(this.scrollTimeout);
+                    this.scrollTimeout = setTimeout(() => {
+                        this.isScrolling = false;
+                    }, 800);
+                }, { passive: true });
+            }
+
+            /* ----- Navigation Methods ----- */
+            nextSlide() {
+                if (this.currentSlide < this.slides.length - 1) {
+                    this.goToSlide(this.currentSlide + 1);
+                }
+            }
+
+            prevSlide() {
+                if (this.currentSlide > 0) {
+                    this.goToSlide(this.currentSlide - 1);
+                }
+            }
+
+            goToSlide(index, smooth = true) {
+                this.currentSlide = index;
+                this.slides[index].scrollIntoView({ behavior: smooth ? 'smooth' : 'instant' });
+                this.updateProgress();
+                this.updateDots();
+                this.updateHash();
+            }
+
+            /* ----- URL Hash: persist slide number across refreshes ----- */
+            updateHash() {
+                history.replaceState(null, '', '#' + this.currentSlide);
+            }
+
+            restoreFromHash() {
+                const hash = window.location.hash.slice(1);
+                const idx = parseInt(hash);
+                if (!isNaN(idx) && idx >= 0 && idx < this.slides.length) {
+                    this.goToSlide(idx, false);
+                }
+            }
+
+            /* ----- Hide keyboard hint after first interaction ----- */
+            hideHintAfterDelay() {
+                const hint = document.getElementById('keyboardHint');
+                const hide = () => {
+                    hint.classList.add('hidden');
+                    document.removeEventListener('keydown', hide);
+                    document.removeEventListener('wheel', hide);
+                    document.removeEventListener('touchstart', hide);
+                };
+
+                // Hide after 8 seconds or on first interaction
+                setTimeout(() => hint.classList.add('hidden'), 8000);
+                document.addEventListener('keydown', hide, { once: true });
+                document.addEventListener('wheel', hide, { once: true });
+                document.addEventListener('touchstart', hide, { once: true });
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new SlidePresentation();
+        });
+    </script>
+</body>
+</html>
