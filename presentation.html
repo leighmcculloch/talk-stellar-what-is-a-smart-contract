@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Contracts on Stellar — A Lunch &amp; Learn</title>
+    <title>Smart Contracts on Stellar</title>
 
     <!-- Fonts: Clash Display (bold display), Space Mono (monospace) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -522,6 +522,31 @@
         }
 
         /* ===========================================
+           CODE BLOCK — Rust/Soroban source code
+           =========================================== */
+        .code {
+            background: var(--off-black);
+            border: 2px solid var(--border);
+            border-left: 4px solid var(--yellow);
+            padding: clamp(0.6rem, 1.2vw, 1.2rem);
+            font-family: var(--font-mono);
+            font-size: clamp(0.6rem, 0.85vw, 0.8rem);
+            line-height: 1.6;
+            color: var(--light);
+            overflow: hidden;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        .code .kw { color: var(--pink); }
+        .code .fn { color: var(--cyan); }
+        .code .ty { color: var(--yellow); }
+        .code .st { color: var(--cyan); }
+        .code .cm { color: var(--dim); }
+        .code .at { color: var(--yellow); font-weight: 700; }
+        .code .mc { color: var(--pink); }
+
+        /* ===========================================
            REVEAL ANIMATIONS — clip-path wipe
            =========================================== */
         .rv {
@@ -696,6 +721,10 @@
     <nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
     <div class="kb-hint" id="kbHint"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> or <kbd>Space</kbd></div>
 
+    <!-- ==========================================
+         ACT 1: THE METAPHOR
+         ========================================== -->
+
     <!-- SLIDE 1: TITLE -->
     <section class="slide title-slide" data-slide="0">
         <div class="slide-inner">
@@ -713,33 +742,252 @@
                 <img src="images/vending-machine-1.jpg" alt="A vending machine">
             </div>
             <p class="big rv" style="max-width: 950px;">
-                You put in money. You make a selection.<br>
-                The machine checks. It gives you the item.<br>
-                No cashier. No negotiation.<br>
-                The <span class="accent">rules enforce themselves</span>.
+                How does a vending machine actually work?
             </p>
         </div>
     </section>
 
-    <!-- SLIDE 3: WHY VENDING MACHINES? -->
+    <!-- SLIDE 3: STEP 1 — SELECT -->
     <section class="slide" data-slide="2">
+        <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
+            <div class="tag rv">Step 1 of 4</div>
+            <h2 class="rv" style="margin-bottom: 0;">You See Something<br>You Want</h2>
+            <svg class="rv-pop" viewBox="0 0 650 340" fill="none" style="max-width: 100%; max-height: min(50vh, 400px);">
+                <!-- Person -->
+                <circle cx="110" cy="90" r="26" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="116" x2="110" y2="220" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="220" x2="82" y2="320" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="220" x2="138" y2="320" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="160" x2="65" y2="200" stroke="#f0f0f0" stroke-width="2.5"/>
+                <!-- Arm pointing at machine -->
+                <line x1="110" y1="160" x2="280" y2="95" stroke="#DFFF00" stroke-width="2.5"/>
+                <!-- Pointing dot -->
+                <circle cx="280" cy="95" r="5" fill="#DFFF00"/>
+
+                <!-- Machine body -->
+                <rect x="310" y="15" width="240" height="310" fill="#111" stroke="#2a2a2a" stroke-width="3"/>
+                <rect x="310" y="15" width="5" height="310" fill="#DFFF00"/>
+
+                <!-- Product slots row 1 -->
+                <rect x="335" y="35" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="400" y="35" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="465" y="35" width="55" height="48" fill="#1a1a1a" stroke="#DFFF00" stroke-width="2.5"/>
+                <!-- Product slots row 2 -->
+                <rect x="335" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="400" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="465" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+
+                <!-- Product icons (simple can shapes) -->
+                <rect x="352" y="45" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="417" y="45" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="482" y="45" width="20" height="28" rx="3" stroke="#DFFF00" stroke-width="1.5"/>
+                <rect x="352" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="417" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="482" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+
+                <!-- Display screen -->
+                <rect x="335" y="165" width="185" height="40" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <!-- Coin slot -->
+                <rect x="335" y="225" width="40" height="50" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <!-- Keypad -->
+                <rect x="395" y="225" width="60" height="50" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1"/>
+                <text x="414" y="248" fill="#444" font-family="monospace" font-size="9">A B C</text>
+                <text x="414" y="264" fill="#444" font-family="monospace" font-size="9">1 2 3</text>
+                <!-- Dispense tray -->
+                <rect x="335" y="290" width="185" height="28" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5"/>
+
+                <!-- Label on highlighted slot -->
+                <text x="492" y="155" fill="#DFFF00" font-family="monospace" font-size="11" text-anchor="middle">B3</text>
+            </svg>
+            <p class="big rv">You browse. You <span class="accent">choose</span>.</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: STEP 2 — PRICE -->
+    <section class="slide" data-slide="3">
+        <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
+            <div class="tag rv">Step 2 of 4</div>
+            <h2 class="rv" style="margin-bottom: 0;">The Price<br>Is Shown</h2>
+            <svg class="rv-pop" viewBox="0 0 650 340" fill="none" style="max-width: 100%; max-height: min(50vh, 400px);">
+                <!-- Person (waiting) -->
+                <circle cx="110" cy="90" r="26" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="116" x2="110" y2="220" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="220" x2="82" y2="320" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="220" x2="138" y2="320" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="160" x2="65" y2="200" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="160" x2="155" y2="200" stroke="#f0f0f0" stroke-width="2.5"/>
+
+                <!-- Machine body -->
+                <rect x="310" y="15" width="240" height="310" fill="#111" stroke="#2a2a2a" stroke-width="3"/>
+                <rect x="310" y="15" width="5" height="310" fill="#DFFF00"/>
+
+                <!-- Product slots row 1 -->
+                <rect x="335" y="35" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="400" y="35" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="465" y="35" width="55" height="48" fill="#1a1a1a" stroke="#DFFF00" stroke-width="2"/>
+                <!-- Product slots row 2 -->
+                <rect x="335" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="400" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="465" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+
+                <!-- Product icons -->
+                <rect x="352" y="45" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="417" y="45" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="482" y="45" width="20" height="28" rx="3" stroke="#DFFF00" stroke-width="1.5"/>
+                <rect x="352" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="417" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="482" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+
+                <!-- Display screen — LIT UP -->
+                <rect x="335" y="165" width="185" height="40" fill="#0a0a0a" stroke="#DFFF00" stroke-width="2.5"/>
+                <text x="427" y="192" fill="#DFFF00" font-family="monospace" font-size="18" font-weight="700" text-anchor="middle">$2.00</text>
+                <!-- Coin slot -->
+                <rect x="335" y="225" width="40" height="50" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <!-- Keypad -->
+                <rect x="395" y="225" width="60" height="50" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1"/>
+                <!-- Dispense tray -->
+                <rect x="335" y="290" width="185" height="28" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5"/>
+
+                <!-- Arrow from display to person (showing price) -->
+                <line x1="335" y1="185" x2="200" y2="130" stroke="#DFFF00" stroke-width="1.5" stroke-dasharray="6,4"/>
+                <polygon points="200,130 212,128 208,140" fill="#DFFF00"/>
+            </svg>
+            <p class="big rv">The rules are <span class="accent">clear up front</span>.</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: STEP 3 — PAY -->
+    <section class="slide" data-slide="4">
+        <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
+            <div class="tag rv">Step 3 of 4</div>
+            <h2 class="rv" style="margin-bottom: 0;">You Pay</h2>
+            <svg class="rv-pop" viewBox="0 0 650 340" fill="none" style="max-width: 100%; max-height: min(50vh, 400px);">
+                <!-- Person (arm extended to coin slot) -->
+                <circle cx="110" cy="90" r="26" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="116" x2="110" y2="220" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="220" x2="82" y2="320" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="220" x2="138" y2="320" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="160" x2="65" y2="200" stroke="#f0f0f0" stroke-width="2.5"/>
+                <!-- Arm reaching to coin slot -->
+                <line x1="110" y1="160" x2="310" y2="245" stroke="#DFFF00" stroke-width="2.5"/>
+
+                <!-- Money (coins/bills traveling to slot) -->
+                <rect x="220" y="195" width="28" height="16" fill="#DFFF00" stroke="#DFFF00" stroke-width="1" rx="2"/>
+                <text x="234" y="208" fill="#111" font-family="monospace" font-size="9" font-weight="700" text-anchor="middle">$</text>
+                <rect x="258" y="210" width="28" height="16" fill="#DFFF00" stroke="#DFFF00" stroke-width="1" rx="2" opacity="0.6"/>
+                <text x="272" y="223" fill="#111" font-family="monospace" font-size="9" font-weight="700" text-anchor="middle">$</text>
+
+                <!-- Machine body -->
+                <rect x="310" y="15" width="240" height="310" fill="#111" stroke="#2a2a2a" stroke-width="3"/>
+                <rect x="310" y="15" width="5" height="310" fill="#DFFF00"/>
+
+                <!-- Product slots row 1 -->
+                <rect x="335" y="35" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="400" y="35" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="465" y="35" width="55" height="48" fill="#1a1a1a" stroke="#DFFF00" stroke-width="2"/>
+                <!-- Product slots row 2 -->
+                <rect x="335" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="400" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="465" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+
+                <!-- Product icons -->
+                <rect x="352" y="45" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="417" y="45" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="482" y="45" width="20" height="28" rx="3" stroke="#DFFF00" stroke-width="1.5"/>
+                <rect x="352" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="417" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="482" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+
+                <!-- Display screen (showing price) -->
+                <rect x="335" y="165" width="185" height="40" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <text x="427" y="192" fill="#DFFF00" font-family="monospace" font-size="18" font-weight="700" text-anchor="middle">$2.00</text>
+                <!-- Coin slot — HIGHLIGHTED -->
+                <rect x="335" y="225" width="40" height="50" fill="#0a0a0a" stroke="#DFFF00" stroke-width="2.5"/>
+                <!-- Arrow into slot -->
+                <polygon points="355,222 349,212 361,212" fill="#DFFF00"/>
+                <!-- Keypad -->
+                <rect x="395" y="225" width="60" height="50" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1"/>
+                <!-- Dispense tray -->
+                <rect x="335" y="290" width="185" height="28" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5"/>
+            </svg>
+            <p class="big rv">You pay the <span class="accent">exact amount</span>.</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 6: STEP 4 — RECEIVE -->
+    <section class="slide" data-slide="5">
+        <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
+            <div class="tag rv">Step 4 of 4</div>
+            <h2 class="rv" style="margin-bottom: 0;">The Machine<br>Delivers</h2>
+            <svg class="rv-pop" viewBox="0 0 650 340" fill="none" style="max-width: 100%; max-height: min(50vh, 400px);">
+                <!-- Person (reaching down to tray) -->
+                <circle cx="110" cy="90" r="26" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="116" x2="110" y2="220" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="220" x2="82" y2="320" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="220" x2="138" y2="320" stroke="#f0f0f0" stroke-width="2.5"/>
+                <line x1="110" y1="160" x2="65" y2="200" stroke="#f0f0f0" stroke-width="2.5"/>
+                <!-- Arm reaching to dispense tray -->
+                <line x1="110" y1="160" x2="310" y2="300" stroke="#DFFF00" stroke-width="2.5"/>
+
+                <!-- Machine body -->
+                <rect x="310" y="15" width="240" height="310" fill="#111" stroke="#2a2a2a" stroke-width="3"/>
+                <rect x="310" y="15" width="5" height="310" fill="#DFFF00"/>
+
+                <!-- Product slots row 1 -->
+                <rect x="335" y="35" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="400" y="35" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="465" y="35" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <!-- Product slots row 2 -->
+                <rect x="335" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="400" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <rect x="465" y="93" width="55" height="48" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+
+                <!-- Product icons (B3 slot is now EMPTY) -->
+                <rect x="352" y="45" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="417" y="45" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <!-- B3 empty — item is falling -->
+                <rect x="352" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="417" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+                <rect x="482" y="103" width="20" height="28" rx="3" stroke="#444" stroke-width="1.5"/>
+
+                <!-- Item falling from B3 to tray -->
+                <rect x="482" y="155" width="20" height="28" rx="3" stroke="#DFFF00" stroke-width="2" opacity="0.3"/>
+                <rect x="482" y="210" width="20" height="28" rx="3" stroke="#DFFF00" stroke-width="2" opacity="0.5"/>
+                <rect x="482" y="265" width="20" height="28" rx="3" stroke="#DFFF00" stroke-width="2" opacity="0.8"/>
+
+                <!-- Display screen -->
+                <rect x="335" y="165" width="185" height="40" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <text x="427" y="191" fill="#00ffd5" font-family="monospace" font-size="14" font-weight="700" text-anchor="middle">THANK YOU</text>
+                <!-- Coin slot -->
+                <rect x="335" y="225" width="40" height="50" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5"/>
+                <!-- Keypad -->
+                <rect x="395" y="225" width="60" height="50" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1"/>
+                <!-- Dispense tray — HIGHLIGHTED with item -->
+                <rect x="335" y="290" width="185" height="28" fill="#0a0a0a" stroke="#DFFF00" stroke-width="2.5"/>
+                <rect x="420" y="293" width="20" height="22" rx="3" fill="#DFFF00" stroke="#DFFF00" stroke-width="1"/>
+            </svg>
+            <p class="big rv">No cashier. No negotiation.<br>The <span class="accent">rules enforce themselves</span>.</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 7: WHY VENDING MACHINES? — THE AGREEMENT -->
+    <section class="slide" data-slide="6">
         <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">Why Vending<br>Machines?</h2>
-            <p class="big rv" style="margin-bottom: var(--gap-sm);">A vending machine is an <span class="accent">agreement</span>.</p>
+            <h2 class="rv">A Vending Machine<br>Is an Agreement</h2>
             <p class="rv" style="color: var(--muted); font-style: italic; margin-bottom: var(--gap-sm);">
                 "If you put in the right amount of money, you will get something out."
             </p>
             <ul class="items">
                 <li class="rv" style="--i:0">First implemented in <strong>hardware</strong> — gears, springs, coin slots</li>
                 <li class="rv" style="--i:1">Now most vending machines run <strong>software</strong> too</li>
-                <li class="rv" style="--i:2">The first swap program — money in, item out</li>
-                <li class="rv" style="--i:3">No middleman. The machine <strong>is</strong> the agreement</li>
+                <li class="rv" style="--i:2">No middleman. The machine <strong>is</strong> the agreement</li>
+                <li class="rv" style="--i:3">What if we could put this pattern <strong class="accent">on a computer network</strong>?</li>
             </ul>
         </div>
     </section>
 
     <!-- SLIDE 4: NICK SZABO / ANCESTOR -->
-    <section class="slide" data-slide="3">
+    <section class="slide" data-slide="7">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">The Ancestor of<br>Smart Contracts</h2>
             <div style="display: flex; gap: clamp(1rem, 3vw, 2.5rem); align-items: flex-start; flex-wrap: wrap;">
@@ -757,7 +1005,7 @@
     </section>
 
     <!-- SLIDE 5: WHAT IS A SMART CONTRACT? -->
-    <section class="slide" data-slide="4">
+    <section class="slide" data-slide="8">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">What Is a<br>Smart Contract?</h2>
             <div style="display: flex; flex-direction: column; gap: var(--gap-sm); max-width: 900px;">
@@ -776,7 +1024,7 @@
     </section>
 
     <!-- SLIDE 6: THE STELLAR NETWORK -->
-    <section class="slide" data-slide="5">
+    <section class="slide" data-slide="9">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">The Stellar<br>Network</h2>
             <p class="rv" style="max-width: 900px;">
@@ -804,10 +1052,14 @@
         </div>
     </section>
 
+    <!-- ==========================================
+         ACT 2: FROM FIXED TO PROGRAMMABLE
+         ========================================== -->
+
     <!-- SLIDE 7: STELLAR'S OLD MACHINE -->
-    <section class="slide" data-slide="6">
+    <section class="slide" data-slide="10">
         <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">Stellar's Old<br>Vending Machine</h2>
+            <h2 class="rv">Stellar's OG<br>Vending Machine</h2>
             <div style="display: flex; gap: clamp(1rem, 3vw, 2rem); align-items: center; flex-wrap: wrap;">
                 <div class="img-wrap rv-pop" style="flex-shrink: 0;">
                     <img src="images/vending-machine-3.jpg" alt="Fixed vending machine" style="max-height: min(45vh, 420px);">
@@ -826,7 +1078,7 @@
     </section>
 
     <!-- SLIDE 8: SOROBAN -->
-    <section class="slide" data-slide="7">
+    <section class="slide" data-slide="11">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">Soroban:<br>The Programmable<br>Machine</h2>
             <div style="display: flex; gap: clamp(1rem, 3vw, 2rem); align-items: center; flex-wrap: wrap;">
@@ -847,10 +1099,71 @@
         </div>
     </section>
 
-    <!-- SLIDE 9: A BASIC SWAP -->
-    <section class="slide" data-slide="8">
+    <!-- SLIDE 9: ANATOMY OF A SOROBAN CONTRACT -->
+    <section class="slide" data-slide="12">
         <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">A Basic Swap</h2>
+            <h2 class="rv">Anatomy of a<br>Soroban Contract</h2>
+            <p class="rv" style="color: var(--muted);">A counter with one button. The simplest machine.</p>
+            <div class="code rv-pop"><span class="at">#[contracterror]</span>
+<span class="kw">pub enum</span> <span class="ty">Error</span> { <span class="ty">Overflow</span> = 1 }
+
+<span class="at">#[contracttype]</span>
+<span class="kw">enum</span> <span class="ty">Key</span> { <span class="ty">Count</span> }
+
+<span class="at">#[contract]</span>
+<span class="kw">pub struct</span> <span class="ty">CounterContract</span>;
+
+<span class="at">#[contractimpl]</span>
+<span class="kw">impl</span> <span class="ty">CounterContract</span> {
+    <span class="kw">pub fn</span> <span class="fn">increment</span>(env: <span class="ty">Env</span>) -&gt; <span class="ty">Result</span>&lt;<span class="ty">u32</span>, <span class="ty">Error</span>&gt; {
+        <span class="kw">let</span> count: <span class="ty">u32</span> = env.<span class="fn">storage</span>().<span class="fn">instance</span>().<span class="fn">get</span>(&amp;<span class="ty">Key</span>::<span class="ty">Count</span>).<span class="fn">unwrap_or</span>(0);
+        <span class="kw">let</span> new_count = count.<span class="fn">checked_add</span>(1).<span class="fn">ok_or</span>(<span class="ty">Error</span>::<span class="ty">Overflow</span>)?;
+        env.<span class="fn">storage</span>().<span class="fn">instance</span>().<span class="fn">set</span>(&amp;<span class="ty">Key</span>::<span class="ty">Count</span>, &amp;new_count);
+        <span class="ty">Ok</span>(new_count)
+    }
+}</div>
+            <ul class="items" style="margin-top: var(--gap-sm);">
+                <li class="rv" style="--i:0"><span class="accent">#[contracttype]</span> — defines a symbol the contract uses as a storage key</li>
+                <li class="rv" style="--i:1"><span class="accent">#[contract]</span> + <span class="accent">#[contractimpl]</span> — the machine and its buttons</li>
+                <li class="rv" style="--i:2"><span class="accent">env.storage()</span> — the machine remembers things between presses</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SLIDE 10: THE BUILDING BLOCKS -->
+    <section class="slide" data-slide="13">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">The Building<br>Blocks</h2>
+            <p class="rv" style="color: var(--muted);">Every machine is built from the same parts.</p>
+            <div class="stats rv-pop" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Storage</div>
+                    <div class="stat-lbl">The machine's memory. Instance, persistent, or temporary.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Auth</div>
+                    <div class="stat-lbl">require_auth() — verify who's pushing the button.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Events</div>
+                    <div class="stat-lbl">Receipts. A log of everything that happened.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Cross-Call</div>
+                    <div class="stat-lbl">Machines can call other machines.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         ACT 3: MACHINES YOU CAN BUILD
+         ========================================== -->
+
+    <!-- SLIDE 11: A BASIC SWAP — THE SODA MACHINE -->
+    <section class="slide" data-slide="14">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">A Basic Swap:<br>The Soda Machine</h2>
             <p class="rv" style="color: var(--muted);">The simplest vending machine: put something in, get something out.</p>
             <div class="machine rv-pop">
                 <div class="name">Soda Machine</div>
@@ -868,14 +1181,120 @@
         </div>
     </section>
 
-    <!-- SLIDE 10: TWO MACHINES, ONE SWAP -->
-    <section class="slide" data-slide="9">
+    <!-- SLIDE 12: SODA MACHINE IN CODE -->
+    <section class="slide" data-slide="15">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">The Soda Machine<br>in Code</h2>
+            <div class="code rv-pop"><span class="at">#[contractimpl]</span>
+<span class="kw">impl</span> <span class="ty">SodaMachine</span> {
+    <span class="kw">pub fn</span> <span class="fn">buy</span>(env: <span class="ty">Env</span>, buyer: <span class="ty">Address</span>, selection: <span class="ty">u32</span>) {
+        buyer.<span class="fn">require_auth</span>();
+
+        <span class="kw">let</span> price: <span class="ty">i128</span> = <span class="fn">get_price</span>(&amp;env, selection);
+
+        <span class="cm">// Take payment from buyer</span>
+        <span class="kw">let</span> token = token::Client::new(&amp;env, &amp;<span class="fn">get_token</span>(&amp;env));
+        token.<span class="fn">transfer</span>(&amp;buyer, &amp;env.<span class="fn">current_contract_address</span>(), &amp;price);
+
+        <span class="cm">// Dispense the item</span>
+        <span class="fn">dispense</span>(&amp;env, &amp;buyer, selection);
+    }
+}</div>
+            <ul class="items" style="margin-top: var(--gap-sm);">
+                <li class="rv" style="--i:0"><span class="accent">require_auth()</span> — buyer proves they're really Alice</li>
+                <li class="rv" style="--i:1"><span class="accent">token.transfer()</span> — move money from buyer to machine</li>
+                <li class="rv" style="--i:2">If anything fails, <strong>everything rolls back</strong>. Atomic.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SLIDE 13: A TOKEN MACHINE -->
+    <section class="slide" data-slide="16">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">A Token Machine</h2>
+            <p class="rv" style="color: var(--muted);">A machine that <strong>creates</strong> tokens and tracks who holds them.</p>
+            <div class="machine rv-pop">
+                <div class="name">Token Machine</div>
+                <div>Token: <span class="val">LOYALTY</span></div>
+                <div>Total supply: <span class="val">0</span> <span class="dim">(so far)</span></div>
+                <div class="dim" style="margin-top: 0.3em;">Buttons: mint, transfer, burn</div>
+            </div>
+            <div class="log rv" style="margin-top: var(--gap-sm);">
+                <div class="ln"><span class="t grn">Mint</span> <span class="v">minted 1,000 LOYALTY to Alice</span></div>
+                <div class="ln"><span class="t blu">Transfer</span> <span class="v">Alice transferred 200 LOYALTY to Bob</span></div>
+                <div class="ln"><span class="t red">Burn</span> <span class="v">Bob burned 200 LOYALTY for a reward</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 14: TOKEN IN CODE -->
+    <section class="slide" data-slide="17">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Token Machine<br>in Code</h2>
+            <div class="code rv-pop"><span class="at">#[contractimpl]</span>
+<span class="kw">impl</span> <span class="ty">Token</span> {
+    <span class="kw">pub fn</span> <span class="fn">mint</span>(env: <span class="ty">Env</span>, to: <span class="ty">Address</span>, amount: <span class="ty">i128</span>) {
+        <span class="kw">let</span> admin = <span class="fn">read_administrator</span>(&amp;env);
+        admin.<span class="fn">require_auth</span>();
+        <span class="fn">receive_balance</span>(&amp;env, to.clone(), amount);
+    }
+}
+
+<span class="at">#[contractimpl(contracttrait)]</span>
+<span class="kw">impl</span> <span class="ty">TokenInterface</span> <span class="kw">for</span> <span class="ty">Token</span> {
+    <span class="kw">fn</span> <span class="fn">transfer</span>(env: <span class="ty">Env</span>, from: <span class="ty">Address</span>, to: <span class="ty">Address</span>, amount: <span class="ty">i128</span>) {
+        from.<span class="fn">require_auth</span>();
+        <span class="fn">spend_balance</span>(&amp;env, from.clone(), amount);
+        <span class="fn">receive_balance</span>(&amp;env, to.clone(), amount);
+    }
+}</div>
+            <ul class="items" style="margin-top: var(--gap-sm);">
+                <li class="rv" style="--i:0"><span class="accent">TokenInterface</span> — a standard. Any machine that speaks it is a token.</li>
+                <li class="rv" style="--i:1"><span class="accent">require_auth()</span> — only the admin can mint, only the owner can transfer</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SLIDE 15: TOKENS CAN REPRESENT ANYTHING -->
+    <section class="slide" data-slide="18">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Tokens Can<br>Represent Anything</h2>
+            <p class="rv" style="color: var(--muted); max-width: 800px;">Same interface. Same transfer, balance, approve. Different meaning.</p>
+            <div class="stats rv-pop" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">USDC</div>
+                    <div class="stat-lbl">US dollars, on-chain. Redeemable 1:1.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">LOYALTY</div>
+                    <div class="stat-lbl">Reward points. Earn, transfer, redeem.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">TICKET</div>
+                    <div class="stat-lbl">Event access. Verifiable, tradeable.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">SHARE</div>
+                    <div class="stat-lbl">Ownership. Dividends, voting rights.</div>
+                </div>
+            </div>
+            <div class="rv" style="margin-top: var(--gap); border-top: 3px solid var(--yellow); padding-top: var(--gap);">
+                <p class="big">
+                    One machine pattern.<br>
+                    <span class="accent">Infinite use cases.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 16: TWO MACHINES, ONE SWAP -->
+    <section class="slide" data-slide="19">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">Two Machines,<br>One Swap</h2>
             <p class="rv" style="color: var(--muted);">Alice wants to swap USDC for EURC. That takes <strong>two</strong> machines working together.</p>
             <div class="dia-row rv-pop">
                 <div class="machine" style="flex: 1;">
-                    <div class="name">USDC Machine</div>
+                    <div class="name">USDC Token</div>
                     <div>Holds <span class="val">USDC balances</span></div>
                 </div>
                 <div class="connector">
@@ -883,7 +1302,7 @@
                     <span>SWAP</span>
                 </div>
                 <div class="machine" style="flex: 1;">
-                    <div class="name">EURC Machine</div>
+                    <div class="name">EURC Token</div>
                     <div>Holds <span class="val">EURC balances</span></div>
                 </div>
             </div>
@@ -896,8 +1315,60 @@
         </div>
     </section>
 
-    <!-- SLIDE 11: LIQUIDITY POOL -->
-    <section class="slide" data-slide="10">
+    <!-- SLIDE 17: ATOMIC SWAP IN CODE -->
+    <section class="slide" data-slide="20">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Atomic Swap<br>in Code</h2>
+            <div class="code rv-pop"><span class="kw">pub fn</span> <span class="fn">swap</span>(env: <span class="ty">Env</span>, a: <span class="ty">Address</span>, b: <span class="ty">Address</span>, <span class="cm">...</span>) {
+    <span class="cm">// A signs: "I'll send amount_a, I want at least min_b_for_a back"</span>
+    a.<span class="fn">require_auth_for_args</span>(
+        (token_a, token_b, amount_a, min_b_for_a).<span class="fn">into_val</span>(&amp;env),
+    );
+    <span class="cm">// B signs: "I'll send amount_b, I want at least min_a_for_b back"</span>
+    b.<span class="fn">require_auth_for_args</span>(
+        (token_b, token_a, amount_b, min_a_for_b).<span class="fn">into_val</span>(&amp;env),
+    );
+
+    <span class="cm">// Enforce both minimums — no one can undercut the deal</span>
+    <span class="kw">if</span> amount_b &lt; min_b_for_a { <span class="fn">panic!</span>(<span class="st">"not enough for A"</span>); }
+    <span class="kw">if</span> amount_a &lt; min_a_for_b { <span class="fn">panic!</span>(<span class="st">"not enough for B"</span>); }
+
+    <span class="cm">// Move tokens: A→B and B→A</span>
+    <span class="fn">move_token</span>(&amp;env, &amp;token_a, &amp;a, &amp;b, amount_a, min_a_for_b);
+    <span class="fn">move_token</span>(&amp;env, &amp;token_b, &amp;b, &amp;a, amount_b, min_b_for_a);
+}</div>
+        </div>
+    </section>
+
+    <!-- SLIDE 18: WHY ATOMIC MATTERS -->
+    <section class="slide" data-slide="21">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Why Atomic<br>Matters</h2>
+            <div style="display: flex; flex-direction: column; gap: var(--gap);">
+                <div class="machine rv-pop">
+                    <div class="name" style="color: var(--cyan);">Success</div>
+                    <div>Alice sends <span class="val">100 USDC</span> &rarr; Bob</div>
+                    <div>Bob sends <span class="val">84.75 EURC</span> &rarr; Alice</div>
+                    <div class="dim">Both sides execute. Done.</div>
+                </div>
+                <div class="machine rv-pop">
+                    <div class="name" style="color: var(--red);">Failure</div>
+                    <div>Alice sends <span class="val">100 USDC</span> &rarr; Bob</div>
+                    <div>Bob's transfer <span style="color: var(--red);">fails</span></div>
+                    <div class="dim">Everything rolls back. Alice keeps her USDC.</div>
+                </div>
+            </div>
+            <div class="rv" style="margin-top: var(--gap); border-top: 3px solid var(--yellow); padding-top: var(--gap);">
+                <p class="big">
+                    Both sides execute, or <span class="accent">neither does</span>.<br>
+                    Trust the machine, not the counterparty.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 19: A LIQUIDITY POOL -->
+    <section class="slide" data-slide="22">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">A Liquidity Pool</h2>
             <p class="rv" style="color: var(--muted);">A machine where people <strong>deposit</strong> assets so others can <strong>swap</strong>.</p>
@@ -911,48 +1382,91 @@
                 <div class="ln"><span class="t grn">Deposit</span> <span class="v">Alice deposited 1,000 USDC + 847 EURC</span></div>
                 <div class="ln"><span class="t blu">Swap</span> <span class="v">Bob swapped 100 USDC for 84.75 EURC (fee: 0.3%)</span></div>
                 <div class="ln"><span class="t pnk">Swap</span> <span class="v">Carol swapped 50 EURC for 58.90 USDC (fee: 0.3%)</span></div>
-                <div class="ln"><span class="t ylw">Withdraw</span> <span class="v">Alice withdrew 1,041 USDC + 813 EURC + fees</span></div>
+                <div class="ln"><span class="t ylw">Withdraw</span> <span class="v">Alice withdrew her share + accumulated fees</span></div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 12: TOKEN MACHINE -->
-    <section class="slide" data-slide="11">
+    <!-- SLIDE 20: HOW CONTRACTS TALK TO EACH OTHER -->
+    <section class="slide" data-slide="23">
         <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">A Token Machine</h2>
-            <p class="rv" style="color: var(--muted);">A machine that <strong>creates</strong> tokens and tracks who holds them.</p>
-            <div class="machine rv-pop">
-                <div class="name">Token Machine</div>
-                <div>Token: <span class="val">LOYALTY</span></div>
-                <div>Total supply: <span class="val">0</span> <span class="dim">(so far)</span></div>
-                <div class="dim" style="margin-top: 0.3em;">Buttons: mint, transfer, redeem</div>
-            </div>
-            <div class="log rv" style="margin-top: var(--gap-sm);">
-                <div class="ln"><span class="t grn">Mint</span> <span class="v">minted 1,000 LOYALTY to Alice</span></div>
-                <div class="ln"><span class="t blu">Transfer</span> <span class="v">Alice transferred 200 LOYALTY to Bob</span></div>
-                <div class="ln"><span class="t red">Redeem</span> <span class="v">Bob redeemed 200 LOYALTY for a reward</span></div>
-            </div>
-            <div class="rv" style="margin-top: var(--gap-sm);">
-                <p style="font-size: var(--small-size); color: var(--dim); margin-bottom: 0.3em; text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--font-mono);">Tokens can represent anything:</p>
-                <div class="badges">
-                    <span class="badge cyn">Dollars (USDC)</span>
-                    <span class="badge ylw">Loyalty Points</span>
-                    <span class="badge blu">Event Tickets</span>
-                    <span class="badge pnk">Shares</span>
+            <h2 class="rv">How Machines<br>Talk to Each Other</h2>
+            <p class="rv" style="color: var(--muted);">A swap machine doesn't hold tokens. It <strong>calls</strong> the token machines.</p>
+            <div class="code rv-pop"><span class="cm">// Import another contract's interface at compile time</span>
+<span class="kw">mod</span> token_a {
+    soroban_sdk::<span class="mc">contractimport!</span>(
+        file = <span class="st">"token_a.wasm"</span>
+    );
+}
+
+<span class="cm">// Create a client and call it</span>
+<span class="kw">let</span> client = token_a::Client::new(&amp;env, &amp;contract_addr);
+client.<span class="fn">transfer</span>(&amp;from, &amp;to, &amp;amount);</div>
+            <ul class="items" style="margin-top: var(--gap-sm);">
+                <li class="rv" style="--i:0"><span class="accent">contractimport!</span> — reads the other machine's blueprint at compile time</li>
+                <li class="rv" style="--i:1"><span class="accent">Client::new</span> — connects to a deployed machine by address</li>
+                <li class="rv" style="--i:2">Type-safe. If the interface doesn't match, it <strong>won't compile</strong>.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SLIDE 21: BUILT-IN TOKEN CLIENT -->
+    <section class="slide" data-slide="24">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">The Standard<br>Token Client</h2>
+            <p class="rv" style="color: var(--muted);">Tokens are so common, the SDK has a <strong>built-in client</strong> for them.</p>
+            <div class="code rv-pop"><span class="kw">use</span> soroban_sdk::token;
+
+<span class="cm">// Works with ANY token — USDC, EURC, custom tokens</span>
+<span class="kw">let</span> usdc = token::Client::new(&amp;env, &amp;usdc_address);
+
+usdc.<span class="fn">transfer</span>(&amp;alice, &amp;bob, &amp;100_0000000);
+usdc.<span class="fn">balance</span>(&amp;alice);
+usdc.<span class="fn">approve</span>(&amp;alice, &amp;spender, &amp;amount, &amp;expiry);</div>
+            <ul class="items" style="margin-top: var(--gap-sm);">
+                <li class="rv" style="--i:0">No <span class="accent">contractimport!</span> needed — the token interface is built into the SDK</li>
+                <li class="rv" style="--i:1">Works with Stellar's native assets (XLM, USDC) and custom tokens alike</li>
+                <li class="rv" style="--i:2">One interface, <strong>every token on the network</strong></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SLIDE 22: BEYOND FINANCE -->
+    <section class="slide" data-slide="25">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Beyond Finance:<br>What Else?</h2>
+            <p class="rv" style="color: var(--muted);">The vending machine pattern works for anything with rules.</p>
+            <div class="stats rv-pop" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Voting</div>
+                    <div class="stat-lbl">Transparent governance. Votes are on-chain, auditable by anyone.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Supply Chain</div>
+                    <div class="stat-lbl">Track provenance. Each step recorded, immutable.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Gaming</div>
+                    <div class="stat-lbl">In-game items as tokens. Trade, sell, own for real.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Identity</div>
+                    <div class="stat-lbl">Verifiable credentials. Prove things without revealing everything.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 13: SUMMARY -->
-    <section class="slide" data-slide="12">
+    <!-- SLIDE 23: THE PATTERN IS ALWAYS THE SAME -->
+    <section class="slide" data-slide="26">
         <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">Vending Machines<br>Everywhere</h2>
+            <h2 class="rv">The Pattern Is<br>Always the Same</h2>
             <ul class="items">
                 <li class="rv" style="--i:0">A simple vending machine — <strong>money in, soda out</strong></li>
-                <li class="rv" style="--i:1">Two machines working together to <strong>swap currencies</strong></li>
-                <li class="rv" style="--i:2">A pool where people <strong>deposit assets and earn fees</strong></li>
-                <li class="rv" style="--i:3">A machine that <strong>creates tokens from nothing</strong></li>
+                <li class="rv" style="--i:1">A token machine — <strong>create, transfer, burn</strong></li>
+                <li class="rv" style="--i:2">Two machines working together to <strong>swap currencies</strong></li>
+                <li class="rv" style="--i:3">A pool where people <strong>deposit assets and earn fees</strong></li>
+                <li class="rv" style="--i:4">Voting, supply chain, gaming, identity — <strong>rules enforced by code</strong></li>
             </ul>
             <div class="rv" style="margin-top: var(--gap); border-top: 3px solid var(--yellow); padding-top: var(--gap);">
                 <p class="big">
@@ -960,14 +1474,52 @@
                     Open, transparent, no gatekeepers.
                 </p>
             </div>
-            <p class="rv" style="font-family: var(--font-mono); font-size: var(--small-size); color: var(--dim); margin-top: var(--gap-sm);">
-                The same pattern Nick Szabo saw in a vending machine in 1994.
+        </div>
+    </section>
+
+    <!-- ==========================================
+         ACT 4: WRAP UP
+         ========================================== -->
+
+    <!-- SLIDE 24: FROM GEARS TO CODE -->
+    <section class="slide" data-slide="27">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">From Gears<br>to Code</h2>
+            <div class="tl">
+                <div class="tl-item rv"><span class="yr">1880s</span> — Mechanical vending machines. Gears and springs enforce the deal.</div>
+                <div class="tl-item rv"><span class="yr">1994</span> — Nick Szabo sees the pattern. Calls it a "smart contract."</div>
+                <div class="tl-item rv"><span class="yr">2009</span> — Bitcoin. The first programmable money, but limited scripting.</div>
+                <div class="tl-item rv"><span class="yr">2014</span> — Stellar launches. Fast payments, built-in DEX. 26 buttons.</div>
+                <div class="tl-item hot rv"><span class="yr">2024</span> — Soroban goes live. Unlimited buttons. Build anything.</div>
+            </div>
+            <p class="rv" style="font-family: var(--font-mono); font-size: var(--small-size); color: var(--dim); margin-top: var(--gap);">
+                The same pattern Nick Szabo saw in a vending machine — now running globally, in Rust.
             </p>
         </div>
     </section>
 
-    <!-- SLIDE 14: QUESTIONS -->
-    <section class="slide q-slide" data-slide="13">
+    <!-- SLIDE 25: GETTING STARTED -->
+    <section class="slide" data-slide="28">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Getting Started</h2>
+            <div class="machine rv-pop">
+                <div class="name">Resources</div>
+                <div><span class="val">soroban.stellar.org</span></div>
+                <div class="dim">Docs, tutorials, and playground</div>
+                <div style="margin-top: 0.5em;"><span class="val">github.com/stellar/soroban-examples</span></div>
+                <div class="dim">Real contract examples: tokens, swaps, and more</div>
+                <div style="margin-top: 0.5em;"><span class="val">stellar.org/developers</span></div>
+                <div class="dim">SDKs, CLI tools, testnet faucet</div>
+            </div>
+            <div class="code rv" style="margin-top: var(--gap-sm);"><span class="cm"># Install the CLI and create your first contract</span>
+cargo install stellar-cli
+stellar contract init my-first-machine
+cd my-first-machine &amp;&amp; cargo build --target wasm32-unknown-unknown</div>
+        </div>
+    </section>
+
+    <!-- SLIDE 26: QUESTIONS -->
+    <section class="slide q-slide" data-slide="29">
         <div class="slide-inner">
             <h1 class="rv">Questions?</h1>
             <p class="rv">Nothing is too basic. If something didn't make sense, ask about it.</p>
