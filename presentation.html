@@ -411,7 +411,7 @@
 
         .img-wrap img {
             max-width: 100%;
-            max-height: min(40vh, 320px);
+            max-height: min(55vh, 500px);
             object-fit: contain;
             display: block;
             filter: grayscale(0.3) contrast(1.1);
@@ -650,7 +650,7 @@
                 --title-size: clamp(2rem, 6vw, 4rem);
                 --h2-size: clamp(1.5rem, 4vw, 2.5rem);
             }
-            .img-wrap img { max-height: min(28vh, 220px); }
+            .img-wrap img { max-height: min(40vh, 360px); }
             .slide-num { font-size: clamp(6rem, 18vw, 14rem); }
         }
 
@@ -747,7 +747,7 @@
             <h2 class="rv">The Ancestor of<br>Smart Contracts</h2>
             <div style="display: flex; gap: clamp(1rem, 3vw, 2.5rem); align-items: flex-start; flex-wrap: wrap;">
                 <div class="img-wrap rv-pop" style="flex-shrink: 0;">
-                    <img src="images/vending-machine-1880s.jpg" alt="Late 1800s vending machine" style="max-height: min(32vh, 280px);">
+                    <img src="images/vending-machine-1880s.jpg" alt="Late 1800s vending machine" style="max-height: min(45vh, 420px);">
                 </div>
                 <div class="tl" style="flex: 1; min-width: min(100%, 280px);">
                     <div class="tl-item rv"><span class="yr">1880s</span> — Vending machines appear. Automated agreements, no human in the middle.</div>
@@ -816,7 +816,7 @@
             <h2 class="rv">Stellar's Old<br>Vending Machine</h2>
             <div style="display: flex; gap: clamp(1rem, 3vw, 2rem); align-items: center; flex-wrap: wrap;">
                 <div class="img-wrap rv-pop" style="flex-shrink: 0;">
-                    <img src="images/vending-machine-3.jpg" alt="Fixed vending machine" style="max-height: min(28vh, 220px);">
+                    <img src="images/vending-machine-3.jpg" alt="Fixed vending machine" style="max-height: min(45vh, 420px);">
                 </div>
                 <div style="flex: 1; min-width: min(100%, 260px);">
                     <ul class="items">
@@ -848,7 +848,7 @@
                     </ul>
                 </div>
                 <div class="img-wrap rv-pop" style="flex-shrink: 0;">
-                    <img src="images/vending-machine-4.jpg" alt="Programmable vending machine" style="max-height: min(28vh, 220px);">
+                    <img src="images/vending-machine-4.jpg" alt="Programmable vending machine" style="max-height: min(45vh, 420px);">
                 </div>
             </div>
         </div>
@@ -1015,7 +1015,7 @@
             }
 
             updateProgress() {
-                const pct = ((this.currentSlide + 1) / this.slides.length) * 100;
+                const pct = (this.currentSlide / (this.slides.length - 1)) * 100;
                 this.progressBar.style.width = pct + '%';
             }
 
