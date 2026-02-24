@@ -1410,29 +1410,8 @@ client.<span class="fn">transfer</span>(&amp;from, &amp;to, &amp;amount);</div>
         </div>
     </section>
 
-    <!-- SLIDE 21: BUILT-IN TOKEN CLIENT -->
+    <!-- SLIDE 21: BEYOND FINANCE -->
     <section class="slide" data-slide="24">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">The Standard<br>Token Client</h2>
-            <p class="rv" style="color: var(--muted);">Tokens are so common, the SDK has a <strong>built-in client</strong> for them.</p>
-            <div class="code rv-pop"><span class="kw">use</span> soroban_sdk::token;
-
-<span class="cm">// Works with ANY token — USDC, EURC, custom tokens</span>
-<span class="kw">let</span> usdc = token::Client::new(&amp;env, &amp;usdc_address);
-
-usdc.<span class="fn">transfer</span>(&amp;alice, &amp;bob, &amp;100_0000000);
-usdc.<span class="fn">balance</span>(&amp;alice);
-usdc.<span class="fn">approve</span>(&amp;alice, &amp;spender, &amp;amount, &amp;expiry);</div>
-            <ul class="items" style="margin-top: var(--gap-sm);">
-                <li class="rv" style="--i:0">No <span class="accent">contractimport!</span> needed — the token interface is built into the SDK</li>
-                <li class="rv" style="--i:1">Works with Stellar's native assets (XLM, USDC) and custom tokens alike</li>
-                <li class="rv" style="--i:2">One interface, <strong>every token on the network</strong></li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- SLIDE 22: BEYOND FINANCE -->
-    <section class="slide" data-slide="25">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">Beyond Finance:<br>What Else?</h2>
             <p class="rv" style="color: var(--muted);">The vending machine pattern works for anything with rules.</p>
@@ -1458,7 +1437,7 @@ usdc.<span class="fn">approve</span>(&amp;alice, &amp;spender, &amp;amount, &amp
     </section>
 
     <!-- SLIDE 23: THE PATTERN IS ALWAYS THE SAME -->
-    <section class="slide" data-slide="26">
+    <section class="slide" data-slide="25">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">The Pattern Is<br>Always the Same</h2>
             <ul class="items">
@@ -1482,7 +1461,7 @@ usdc.<span class="fn">approve</span>(&amp;alice, &amp;spender, &amp;amount, &amp
          ========================================== -->
 
     <!-- SLIDE 24: FROM GEARS TO CODE -->
-    <section class="slide" data-slide="27">
+    <section class="slide" data-slide="26">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">From Gears<br>to Code</h2>
             <div class="tl">
@@ -1499,7 +1478,7 @@ usdc.<span class="fn">approve</span>(&amp;alice, &amp;spender, &amp;amount, &amp
     </section>
 
     <!-- SLIDE 25: GETTING STARTED -->
-    <section class="slide" data-slide="28">
+    <section class="slide" data-slide="27">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">Getting Started</h2>
             <div class="machine rv-pop">
@@ -1519,7 +1498,7 @@ cd my-first-machine &amp;&amp; cargo build --target wasm32-unknown-unknown</div>
     </section>
 
     <!-- SLIDE 26: QUESTIONS -->
-    <section class="slide q-slide" data-slide="29">
+    <section class="slide q-slide" data-slide="28">
         <div class="slide-inner">
             <h1 class="rv">Questions?</h1>
             <p class="rv">Nothing is too basic. If something didn't make sense, ask about it.</p>

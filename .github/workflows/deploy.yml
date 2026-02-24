@@ -21,11 +21,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install presenterm
-        run: cargo install presenterm
-
-      - name: Export slides to HTML
-        run: presenterm --export-html slides.md --output _site/index.html --config-file presenterm-ci.yaml
+      - name: Build site
+        run: |
+          mkdir _site
+          cp presentation.html _site/index.html
+          cp -r images _site/images
 
       - uses: actions/upload-pages-artifact@v3
 
