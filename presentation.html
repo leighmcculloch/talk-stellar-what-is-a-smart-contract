@@ -719,7 +719,7 @@
 
     <div class="progress-bar" id="progressBar"></div>
     <nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
-    <div class="kb-hint" id="kbHint"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> or <kbd>Space</kbd></div>
+    <div class="kb-hint" id="kbHint"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> or <kbd>Space</kbd> &middot; <kbd>P</kbd> presenter</div>
 
     <!-- ==========================================
          ACT 1: THE METAPHOR
@@ -1635,7 +1635,242 @@ cd my-first-machine &amp;&amp; cargo build --target wasm32-unknown-unknown</div>
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
+        /* ===========================================
+           SPEAKER NOTES — per slide
+           =========================================== */
+        const SPEAKER_NOTES = [
+            // 0: Title
+            "Welcome everyone. Today we're going to talk about smart contracts on Stellar. I'm going to start with a question that might seem weird — what does a vending machine have to do with blockchain?",
+
+            // 1: Let's Talk About Vending Machines
+            "Before we write a single line of code, I want to talk about vending machines. Everyone has used one. They're simple, predictable, and they work without a human in the loop. Keep that in mind.",
+
+            // 2: Step 1 — SELECT
+            "Step one: you walk up and you see the products. You pick one. B3. You've made a choice. The machine doesn't negotiate. The options are fixed.",
+
+            // 3: Step 2 — PRICE
+            "Step two: the machine tells you the price. Two dollars. No haggling. No hidden fees. The rules are posted up front before you commit anything.",
+
+            // 4: Step 3 — PAY
+            "Step three: you pay. You insert the exact amount. Money goes in. At this point, you've committed, but you haven't gotten anything yet.",
+
+            // 5: Step 4 — RECEIVE
+            "Step four: the machine delivers. No cashier decided whether you deserve the soda. No one can stop it. The mechanism — the rules — enforce themselves. That's the key insight.",
+
+            // 6: A Vending Machine Is an Agreement
+            "A vending machine is really an agreement encoded in hardware. Gears, springs, coin mechanisms — all enforcing the rule: right money in, product out. No middleman. What if we could put this same pattern on a computer network?",
+
+            // 7: The Ancestor of Smart Contracts
+            "In 1994, a computer scientist named Nick Szabo looked at vending machines and saw something deeper. He called them the ancestor of smart contracts. He coined the term 'smart contract' — fourteen years before Bitcoin even existed.",
+
+            // 8: What Is a Smart Contract?
+            "So what is a smart contract? Take the vending machine pattern — an agreement that enforces itself — remove the physical machine, keep only the logic, and put it on a decentralized network. Now anyone, anywhere can use it. That's a smart contract.",
+
+            // 9: The Stellar Network
+            "Stellar is the network we're putting these machines on. Founded in 2014, focused on payments and financial access. Fast settlement, fraction-of-a-penny fees. Think of it as the plaza where our vending machines get deployed.",
+
+            // 10: Stellar's OG Vending Machine
+            "For its first decade, Stellar had 26 built-in operations. Send payments, create offers, manage trust lines. Like a machine with 26 preset buttons. Very useful — but if you wanted something not on the menu, you were out of luck.",
+
+            // 11: Soroban: The Programmable Machine
+            "Then in February 2024, Soroban launched. Stellar's smart contract platform. Written in Rust, compiled to WebAssembly. Now instead of 26 fixed buttons, anyone can build a machine with any buttons they want. And the old buttons still work too.",
+
+            // 12: Anatomy of a Soroban Contract
+            "Here's what a Soroban contract looks like. This is the simplest possible machine — a counter with one button. contracttype defines a storage key as a symbol. contract and contractimpl define the machine and its buttons. env.storage() lets the machine remember state between calls. checked_add and the error enum handle overflow safely.",
+
+            // 13: The Building Blocks
+            "Every Soroban contract is built from the same four primitives. Storage — the machine's memory, with instance, persistent, or temporary lifetimes. Auth — require_auth verifies who's pushing the button. Events — receipts, a log of everything that happened. And cross-contract calls — machines can call other machines.",
+
+            // 14: A Basic Swap — The Soda Machine
+            "Let's build our first real machine. The simplest vending machine: put money in, get a product out. Alice inserts two dollars, presses B4, gets a soda. The machine even makes change. Simple, predictable, atomic.",
+
+            // 15: The Soda Machine in Code
+            "Here it is in Rust. require_auth proves the buyer is really Alice. token.transfer moves money from buyer to the machine. If anything fails — insufficient balance, wrong token — everything rolls back. The whole transaction is atomic.",
+
+            // 16: A Token Machine
+            "Now let's build a machine that creates tokens and tracks who holds them. This one has three buttons: mint, transfer, burn. Think of it like a loyalty points system — a store can mint points, customers can transfer them, and they can burn them for rewards.",
+
+            // 17: Token Machine in Code
+            "The key thing here is TokenInterface — it's a standard trait. Any contract that implements it is recognized as a token across the entire network. require_auth ensures only the admin can mint, and only the owner can transfer their tokens.",
+
+            // 18: Tokens Can Represent Anything
+            "Same interface, completely different meanings. USDC is real dollars on-chain. LOYALTY is reward points. TICKET is event access. SHARE is ownership with dividends. One machine pattern, infinite use cases. That's the power of a standard interface.",
+
+            // 19: Two Machines, One Swap
+            "Now let's compose machines. Alice wants to swap USDC for EURC. That requires two token machines working together, coordinated by a swap contract. Three contracts, one atomic transaction.",
+
+            // 20: Atomic Swap in Code
+            "Here's the swap code. Each party signs what they're willing to send AND the minimum they'll accept back. The contract checks both minimums are met — nobody can undercut the deal. Then it moves the tokens. If anything fails, everything rolls back.",
+
+            // 21: Why Atomic Matters
+            "Why does atomicity matter? In the success case, both sides execute. In the failure case — maybe Bob doesn't have enough EURC — everything rolls back. Alice keeps her USDC. You never end up in a state where one side paid and the other didn't deliver.",
+
+            // 22: A Liquidity Pool
+            "A liquidity pool takes this further. People deposit assets so others can swap against them. Depositors earn fees from every swap. This is how decentralized exchanges work — no order book, no matching engine, just math in a contract.",
+
+            // 23: How Machines Talk to Each Other
+            "Cross-contract calls are how machines compose. contractimport reads another contract's interface at compile time. Client::new connects to a deployed instance. It's type-safe — if the interface doesn't match, your code won't even compile.",
+
+            // 24: Beyond Finance
+            "The pattern isn't limited to finance. Voting — transparent, auditable, on-chain. Supply chain — every step recorded and immutable. Gaming — in-game items as real tokens. Identity — prove things without revealing everything. Anywhere you need rules that enforce themselves.",
+
+            // 25: The Pattern Is Always the Same
+            "Every example we've seen is the same pattern. A soda machine, a token, a swap, a pool, voting, identity — they're all just agreements that enforce themselves. Open, transparent, no gatekeepers.",
+
+            // 26: From Gears to Code
+            "The timeline: 1880s vending machines, 1994 Szabo coins the term, 2009 Bitcoin, 2014 Stellar launches with 26 preset operations, and 2024 Soroban goes live with unlimited possibilities. The same pattern Szabo saw in a vending machine — now running globally, in Rust.",
+
+            // 27: Getting Started
+            "If you want to try this, here are the resources. soroban.stellar.org has docs and tutorials. The soroban-examples repo has real contracts you can study. Three commands to get started: install the CLI, init a project, and build.",
+
+            // 28: Questions
+            "That's the talk. Questions? Nothing is too basic. If something didn't click, let's talk through it."
+        ];
+
+        /* ===========================================
+           PRESENTER WINDOW — BroadcastChannel sync
+           =========================================== */
+        const PRESENTER_CHANNEL = 'slide-presenter-sync';
+        let presenterWindow = null;
+        let channel = null;
+
+        function initPresenterSync(presentation) {
+            channel = new BroadcastChannel(PRESENTER_CHANNEL);
+            channel.onmessage = (e) => {
+                if (e.data.type === 'nav') {
+                    presentation.goToSlide(e.data.slide);
+                }
+            };
+        }
+
+        function broadcastSlide(index) {
+            if (channel) {
+                channel.postMessage({ type: 'slide', slide: index, total: document.querySelectorAll('.slide').length });
+            }
+        }
+
+        function openPresenterWindow() {
+            if (presenterWindow && !presenterWindow.closed) {
+                presenterWindow.focus();
+                return;
+            }
+            presenterWindow = window.open('', 'presenter', 'width=800,height=600');
+            if (!presenterWindow) { alert('Pop-up blocked. Allow pop-ups for presenter view.'); return; }
+
+            const doc = presenterWindow.document;
+            doc.open();
+            doc.write(`<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Presenter Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#f0f0f0;font-family:'Inter',sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:2px solid #2a2a2a;flex-shrink:0}
+.slide-counter{font-family:'Space Mono',monospace;font-size:1.1rem;color:#DFFF00;font-weight:700}
+.timer{font-family:'Space Mono',monospace;font-size:1rem;color:#777}
+.nav-btns{display:flex;gap:8px}
+.nav-btns button{background:#111;border:2px solid #2a2a2a;color:#f0f0f0;padding:6px 16px;font-family:'Space Mono',monospace;font-size:0.85rem;cursor:pointer;text-transform:uppercase;letter-spacing:0.05em}
+.nav-btns button:hover{border-color:#DFFF00;color:#DFFF00}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.notes-section{flex:1;padding:24px;overflow-y:auto}
+.notes-label{font-family:'Space Mono',monospace;font-size:0.7rem;color:#444;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px}
+.notes-text{font-size:1.15rem;line-height:1.7;color:#ccc}
+.next-section{border-top:2px solid #2a2a2a;padding:16px 20px;flex-shrink:0;background:#111}
+.next-label{font-family:'Space Mono',monospace;font-size:0.7rem;color:#444;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:4px}
+.next-title{font-size:0.95rem;color:#777}
+.progress{height:3px;background:#1a1a1a;flex-shrink:0}
+.progress-fill{height:100%;background:#DFFF00;transition:width 0.3s ease}
+</style></head><body>
+<div class="top">
+  <span class="slide-counter" id="counter">1 / 29</span>
+  <div class="nav-btns">
+    <button id="prevBtn">&larr; Prev</button>
+    <button id="nextBtn">Next &rarr;</button>
+  </div>
+  <span class="timer" id="timer">00:00</span>
+</div>
+<div class="progress"><div class="progress-fill" id="pbar"></div></div>
+<div class="main">
+  <div class="notes-section">
+    <div class="notes-label">Speaker Notes</div>
+    <div class="notes-text" id="notes"></div>
+  </div>
+  <div class="next-section">
+    <div class="next-label">Up Next</div>
+    <div class="next-title" id="nextSlide"></div>
+  </div>
+</div>
+<script>
+const ch = new BroadcastChannel('${PRESENTER_CHANNEL}');
+const notes = ${JSON.stringify(SPEAKER_NOTES)};
+const slideTitles = ${JSON.stringify(Array.from(document.querySelectorAll('.slide')).map(s => {
+                const h = s.querySelector('h1, h2');
+                return h ? h.textContent.trim().replace(/\\n/g, ' ') : 'Slide';
+            }))};
+let current = 0;
+let total = ${document.querySelectorAll('.slide').length};
+const startTime = Date.now();
+
+function updateView(idx) {
+    current = idx;
+    document.getElementById('counter').textContent = (idx + 1) + ' / ' + total;
+    document.getElementById('notes').textContent = notes[idx] || '';
+    document.getElementById('nextSlide').textContent = idx < total - 1 ? slideTitles[idx + 1] : '— End —';
+    document.getElementById('pbar').style.width = (idx / (total - 1) * 100) + '%';
+}
+
+ch.onmessage = (e) => {
+    if (e.data.type === 'slide') {
+        updateView(e.data.slide);
+        total = e.data.total;
+    }
+};
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+    if (current > 0) ch.postMessage({ type: 'nav', slide: current - 1 });
+});
+document.getElementById('nextBtn').addEventListener('click', () => {
+    if (current < total - 1) ch.postMessage({ type: 'nav', slide: current + 1 });
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); if (current < total - 1) ch.postMessage({ type: 'nav', slide: current + 1 }); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); if (current > 0) ch.postMessage({ type: 'nav', slide: current - 1 }); }
+});
+
+setInterval(() => {
+    const s = Math.floor((Date.now() - startTime) / 1000);
+    const m = Math.floor(s / 60);
+    document.getElementById('timer').textContent = String(m).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+}, 1000);
+
+updateView(0);
+ch.postMessage({ type: 'nav', slide: 0 });
+<\/script></body></html>`);
+            doc.close();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const pres = new SlidePresentation();
+            initPresenterSync(pres);
+
+            // Broadcast slide changes
+            const origGoTo = pres.goToSlide.bind(pres);
+            pres.goToSlide = function(index, smooth = true) {
+                origGoTo(index, smooth);
+                broadcastSlide(index);
+            };
+
+            // P key opens presenter window
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'p' || e.key === 'P') {
+                    if (!e.ctrlKey && !e.metaKey) {
+                        openPresenterWindow();
+                        broadcastSlide(pres.currentSlide);
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
