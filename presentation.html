@@ -1742,7 +1742,7 @@ cd my-first-machine &amp;&amp; cargo build --target wasm32-unknown-unknown</div>
             "Let's build our first real machine. The simplest vending machine: put money in, get a product out. Alice inserts two dollars, presses B4, gets a soda. The machine even makes change. Simple, predictable, atomic.",
 
             // 16: The Soda Machine in Code
-            "Here it is in Rust. require_auth proves the buyer is really Alice. token.transfer moves money from buyer to the machine. If anything fails — insufficient balance, wrong token — everything rolls back. The whole transaction is atomic.",
+            "A swap contract is very similar to a vending machine. Here it is in Rust. require_auth proves the buyer is really Alice. token.transfer moves money from buyer to the machine. If anything fails — insufficient balance, wrong token — everything rolls back. The whole transaction is atomic.",
 
             // 17: A Token Machine
             "Now let's build a machine that creates tokens and tracks who holds them. This one has three buttons: mint, transfer, burn. Think of it like a loyalty points system — a store can mint points, customers can transfer them, and they can burn them for rewards.",
