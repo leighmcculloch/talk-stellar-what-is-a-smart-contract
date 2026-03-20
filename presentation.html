@@ -1151,7 +1151,11 @@
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">The Building<br>Blocks</h2>
             <p class="rv" style="color: var(--muted);">Every machine is built from the same parts.</p>
-            <div class="stats rv-pop" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="stats rv-pop" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Logic</div>
+                    <div class="stat-lbl">The rules. What happens when you push a button.</div>
+                </div>
                 <div class="stat">
                     <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Storage</div>
                     <div class="stat-lbl">The machine's memory. Instance, persistent, or temporary.</div>
@@ -1732,7 +1736,7 @@ cd my-first-machine &amp;&amp; cargo build --target wasm32-unknown-unknown</div>
             "Here's what a Soroban contract looks like. This is the simplest possible machine — a counter with one button. Every time the button is pressed, the number goes up. Just like how a vending machine has its rules encoded in hardware, this contract's rules are in code that gets built to WebAssembly instructions. They get executed by the network. Enforced by the network.",
 
             // 14: The Building Blocks
-            "Every Soroban contract is built from the same four primitives. Storage — the machine's memory, with instance, persistent, or temporary lifetimes. Auth — require_auth verifies who's pushing the button. Events — receipts, a log of everything that happened. And cross-contract calls — machines can call other machines.",
+            "Every Soroban contract is built from the same five primitives. Logic — the rules, what happens when you push a button. Storage — the machine's memory. Auth — require_auth verifies who's pushing the button. Events — receipts, a log of everything that happened. And cross-contract calls — machines can call other machines.",
 
             // 15: A Basic Swap — The Soda Machine
             "Let's build our first real machine. The simplest vending machine: put money in, get a product out. Alice inserts two dollars, presses B4, gets a soda. The machine even makes change. Simple, predictable, atomic.",
