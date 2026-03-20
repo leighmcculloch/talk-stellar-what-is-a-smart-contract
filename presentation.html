@@ -1729,7 +1729,7 @@ cd my-first-machine &amp;&amp; cargo build --target wasm32-unknown-unknown</div>
             "Was Stellar the first smart contract platform? No. That was Ethereum, launched in 2015. Vitalik Buterin saw the limitations of Bitcoin's scripting and built a blockchain designed from the ground up for programmable contracts. Ethereum defined the vocabulary — Solidity, the EVM, gas. Since then many others have followed: Solana, Avalanche, Polkadot. Stellar chose to wait, learn from what worked and what didn't, and then build Soroban.",
 
             // 13: Anatomy of a Soroban Contract
-            "Here's what a Soroban contract looks like. This is the simplest possible machine — a counter with one button. contracttype defines a storage key as a symbol. contract and contractimpl define the machine and its buttons. env.storage() lets the machine remember state between calls. checked_add and the error enum handle overflow safely.",
+            "Here's what a Soroban contract looks like. This is the simplest possible machine — a counter with one button. Every time the button is pressed, the number goes up. Just like how a vending machine has its rules encoded in hardware, this contract's rules are in code that gets built to WebAssembly instructions. They get executed by the network. Enforced by the network.",
 
             // 14: The Building Blocks
             "Every Soroban contract is built from the same four primitives. Storage — the machine's memory, with instance, persistent, or temporary lifetimes. Auth — require_auth verifies who's pushing the button. Events — receipts, a log of everything that happened. And cross-contract calls — machines can call other machines.",
