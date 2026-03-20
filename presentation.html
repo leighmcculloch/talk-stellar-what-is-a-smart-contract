@@ -1807,6 +1807,22 @@ cd my-first-machine &amp;&amp; cargo build --target wasm32-unknown-unknown</div>
             }
         }
 
+        function broadcastRefresh(index) {
+            if (channel) {
+                const titles = Array.from(document.querySelectorAll('.slide')).map(s => {
+                    const h = s.querySelector('h1, h2');
+                    return h ? h.textContent.trim().replace(/\n/g, ' ') : 'Slide';
+                });
+                channel.postMessage({
+                    type: 'refresh',
+                    slide: index,
+                    total: document.querySelectorAll('.slide').length,
+                    notes: SPEAKER_NOTES,
+                    titles: titles
+                });
+            }
+        }
+
         function openPresenterWindow() {
             if (presenterWindow && !presenterWindow.closed) {
                 presenterWindow.focus();
@@ -1882,6 +1898,14 @@ ch.onmessage = (e) => {
         updateView(e.data.slide);
         total = e.data.total;
     }
+    if (e.data.type === 'refresh') {
+        notes.length = 0;
+        e.data.notes.forEach(n => notes.push(n));
+        slideTitles.length = 0;
+        e.data.titles.forEach(t => slideTitles.push(t));
+        total = e.data.total;
+        updateView(e.data.slide);
+    }
 };
 
 document.getElementById('prevBtn').addEventListener('click', () => {
@@ -1927,6 +1951,9 @@ ch.postMessage({ type: 'nav', slide: 0 });
                     broadcastSlide(pres.currentSlide);
                 }
             });
+
+            // Refresh presenter window with updated content on page load
+            broadcastRefresh(pres.currentSlide);
         });
     </script>
 </body>
