@@ -719,7 +719,7 @@
 
     <div class="progress-bar" id="progressBar"></div>
     <nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
-    <div class="kb-hint" id="kbHint"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> or <kbd>Space</kbd></div>
+    <div class="kb-hint" id="kbHint"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> or <kbd>Space</kbd> &middot; <kbd>P</kbd> presenter</div>
 
     <!-- ==========================================
          ACT 1: THE METAPHOR
@@ -1861,9 +1861,15 @@ ch.postMessage({ type: 'nav', slide: 0 });
                 broadcastSlide(index);
             };
 
-            // Auto-open presenter window on load
-            openPresenterWindow();
-            broadcastSlide(pres.currentSlide);
+            // P key opens presenter window
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'p' || e.key === 'P') {
+                    if (!e.ctrlKey && !e.metaKey) {
+                        openPresenterWindow();
+                        broadcastSlide(pres.currentSlide);
+                    }
+                }
+            });
         });
     </script>
 </body>
