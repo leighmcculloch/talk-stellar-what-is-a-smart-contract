@@ -226,6 +226,9 @@
             background: var(--yellow);
         }
 
+        .machine.highlight-cyan { border-color: var(--cyan); }
+        .machine.highlight-cyan::before { background: var(--cyan); }
+
         .machine .name {
             font-family: var(--font-display);
             font-size: var(--h3-size);
@@ -319,6 +322,9 @@
             padding: clamp(0.6rem, 1.2vw, 1rem);
             border-top: 4px solid var(--yellow);
         }
+
+        .stat.highlight-cyan { border-top-color: var(--cyan); }
+        .stat.highlight-cyan .stat-val { color: var(--cyan); }
 
         .stat .stat-val {
             font-family: var(--font-display);
@@ -1310,16 +1316,81 @@
         </div>
     </section>
 
-    <!-- SLIDE: LIFECYCLE OF A SMART CONTRACT -->
+    <!-- SLIDE: LIFECYCLE — Overview -->
     <section class="slide" data-slide="16">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">Lifecycle of Smart<br>Contract Development</h2>
-            <div class="rv-pop" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1vw, 0.8rem); max-width: 600px; margin: 0 auto;">
+            <div class="rv-pop" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1vw, 0.8rem);">
                 <div class="machine" style="text-align: center;">
                     <div class="name" style="color: var(--yellow);">1. Write</div>
                     <div class="dim">Code + Tests</div>
                 </div>
                 <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">2. Audit</div>
+                    <div class="dim">Review +<br>Verify</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">3. Compile</div>
+                    <div class="dim">.wasm file</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">4. Upload</div>
+                    <div class="dim">To the network</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">5. Deploy</div>
+                    <div class="dim">Create an instance</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">6. Use</div>
+                    <div class="dim">Call, interact, compose</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE: LIFECYCLE — Write -->
+    <section class="slide" data-slide="17">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Lifecycle of Smart<br>Contract Development</h2>
+            <div class="rv-pop" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1vw, 0.8rem);">
+                <div class="machine highlight-cyan" style="text-align: center;">
+                    <div class="name" style="color: var(--cyan);">1. Write</div>
+                    <div class="dim">Code + Tests</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">2. Audit</div>
+                    <div class="dim">Review +<br>Verify</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">3. Compile</div>
+                    <div class="dim">.wasm file</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">4. Upload</div>
+                    <div class="dim">To the network</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">5. Deploy</div>
+                    <div class="dim">Create an instance</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">6. Use</div>
+                    <div class="dim">Call, interact, compose</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="18">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Lifecycle of Smart<br>Contract Development</h2>
+            <div class="rv-pop" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1vw, 0.8rem);">
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">1. Write</div>
+                    <div class="dim">Code + Tests</div>
+                </div>
+                <div class="machine highlight-cyan" style="text-align: center;">
                     <div class="name" style="color: var(--cyan);">2. Audit</div>
                     <div class="dim">Review +<br>Verify</div>
                 </div>
@@ -1343,8 +1414,138 @@
         </div>
     </section>
 
-    <!-- SLIDE: THE BUILDING BLOCKS -->
-    <section class="slide" data-slide="17">
+    <section class="slide" data-slide="19">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Lifecycle of Smart<br>Contract Development</h2>
+            <div class="rv-pop" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1vw, 0.8rem);">
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">1. Write</div>
+                    <div class="dim">Code + Tests</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">2. Audit</div>
+                    <div class="dim">Review +<br>Verify</div>
+                </div>
+                <div class="machine highlight-cyan" style="text-align: center;">
+                    <div class="name" style="color: var(--cyan);">3. Compile</div>
+                    <div class="dim">.wasm file</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">4. Upload</div>
+                    <div class="dim">To the network</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">5. Deploy</div>
+                    <div class="dim">Create an instance</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">6. Use</div>
+                    <div class="dim">Call, interact, compose</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="20">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Lifecycle of Smart<br>Contract Development</h2>
+            <div class="rv-pop" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1vw, 0.8rem);">
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">1. Write</div>
+                    <div class="dim">Code + Tests</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">2. Audit</div>
+                    <div class="dim">Review +<br>Verify</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">3. Compile</div>
+                    <div class="dim">.wasm file</div>
+                </div>
+                <div class="machine highlight-cyan" style="text-align: center;">
+                    <div class="name" style="color: var(--cyan);">4. Upload</div>
+                    <div class="dim">To the network</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">5. Deploy</div>
+                    <div class="dim">Create an instance</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">6. Use</div>
+                    <div class="dim">Call, interact, compose</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="21">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Lifecycle of Smart<br>Contract Development</h2>
+            <div class="rv-pop" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1vw, 0.8rem);">
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">1. Write</div>
+                    <div class="dim">Code + Tests</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">2. Audit</div>
+                    <div class="dim">Review +<br>Verify</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">3. Compile</div>
+                    <div class="dim">.wasm file</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">4. Upload</div>
+                    <div class="dim">To the network</div>
+                </div>
+                <div class="machine highlight-cyan" style="text-align: center;">
+                    <div class="name" style="color: var(--cyan);">5. Deploy</div>
+                    <div class="dim">Create an instance</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">6. Use</div>
+                    <div class="dim">Call, interact, compose</div>
+                </div>
+            </div>
+            <div class="rv" style="font-family: var(--font-mono); font-size: clamp(1rem, 1.8vw, 1.4rem); color: var(--cyan); text-align: center; letter-spacing: 0.08em;"><span style="font-weight: 700; color: var(--cyan); border: 2px solid var(--cyan); padding: 0 0.15em; margin-right: 0.1em;">C</span>DLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC</div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="22">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Lifecycle of Smart<br>Contract Development</h2>
+            <div class="rv-pop" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1vw, 0.8rem);">
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">1. Write</div>
+                    <div class="dim">Code + Tests</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">2. Audit</div>
+                    <div class="dim">Review +<br>Verify</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">3. Compile</div>
+                    <div class="dim">.wasm file</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">4. Upload</div>
+                    <div class="dim">To the network</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">5. Deploy</div>
+                    <div class="dim">Create an instance</div>
+                </div>
+                <div class="machine highlight-cyan" style="text-align: center;">
+                    <div class="name" style="color: var(--cyan);">6. Use</div>
+                    <div class="dim">Call, interact, compose</div>
+                </div>
+            </div>
+            <div class="rv" style="font-family: var(--font-mono); font-size: clamp(1rem, 1.8vw, 1.4rem); color: var(--cyan); text-align: center; letter-spacing: 0.08em;"><span style="font-weight: 700; color: var(--cyan); border: 2px solid var(--cyan); padding: 0 0.15em; margin-right: 0.1em;">C</span>DLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC</div>
+        </div>
+    </section>
+
+    <!-- SLIDE: THE BUILDING BLOCKS — Overview -->
+    <section class="slide" data-slide="23">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">The Building<br>Blocks</h2>
             <p class="rv" style="color: var(--muted);">Every contract has some common components.</p>
@@ -1373,8 +1574,158 @@
         </div>
     </section>
 
+    <!-- SLIDE: THE BUILDING BLOCKS — Logic -->
+    <section class="slide" data-slide="24">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">The Building<br>Blocks</h2>
+            <p class="rv" style="color: var(--muted);">Every contract has some common components.</p>
+            <div class="stats rv-pop" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="stat highlight-cyan">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Logic</div>
+                    <div class="stat-lbl">The rules. What happens when you push a button.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Storage</div>
+                    <div class="stat-lbl">The machine's memory. Instance, persistent, or temporary.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Auth</div>
+                    <div class="stat-lbl">require_auth() — verify who's pushing the button.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Events</div>
+                    <div class="stat-lbl">Receipts. A log of everything that happened.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Cross-Call</div>
+                    <div class="stat-lbl">Machines can call other machines.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE: THE BUILDING BLOCKS — Storage -->
+    <section class="slide" data-slide="25">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">The Building<br>Blocks</h2>
+            <p class="rv" style="color: var(--muted);">Every contract has some common components.</p>
+            <div class="stats rv-pop" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Logic</div>
+                    <div class="stat-lbl">The rules. What happens when you push a button.</div>
+                </div>
+                <div class="stat highlight-cyan">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Storage</div>
+                    <div class="stat-lbl">The machine's memory. Instance, persistent, or temporary.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Auth</div>
+                    <div class="stat-lbl">require_auth() — verify who's pushing the button.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Events</div>
+                    <div class="stat-lbl">Receipts. A log of everything that happened.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Cross-Call</div>
+                    <div class="stat-lbl">Machines can call other machines.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE: THE BUILDING BLOCKS — Auth -->
+    <section class="slide" data-slide="26">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">The Building<br>Blocks</h2>
+            <p class="rv" style="color: var(--muted);">Every contract has some common components.</p>
+            <div class="stats rv-pop" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Logic</div>
+                    <div class="stat-lbl">The rules. What happens when you push a button.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Storage</div>
+                    <div class="stat-lbl">The machine's memory. Instance, persistent, or temporary.</div>
+                </div>
+                <div class="stat highlight-cyan">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Auth</div>
+                    <div class="stat-lbl">require_auth() — verify who's pushing the button.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Events</div>
+                    <div class="stat-lbl">Receipts. A log of everything that happened.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Cross-Call</div>
+                    <div class="stat-lbl">Machines can call other machines.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE: THE BUILDING BLOCKS — Events -->
+    <section class="slide" data-slide="27">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">The Building<br>Blocks</h2>
+            <p class="rv" style="color: var(--muted);">Every contract has some common components.</p>
+            <div class="stats rv-pop" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Logic</div>
+                    <div class="stat-lbl">The rules. What happens when you push a button.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Storage</div>
+                    <div class="stat-lbl">The machine's memory. Instance, persistent, or temporary.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Auth</div>
+                    <div class="stat-lbl">require_auth() — verify who's pushing the button.</div>
+                </div>
+                <div class="stat highlight-cyan">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Events</div>
+                    <div class="stat-lbl">Receipts. A log of everything that happened.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Cross-Call</div>
+                    <div class="stat-lbl">Machines can call other machines.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE: THE BUILDING BLOCKS — Cross-Call -->
+    <section class="slide" data-slide="28">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">The Building<br>Blocks</h2>
+            <p class="rv" style="color: var(--muted);">Every contract has some common components.</p>
+            <div class="stats rv-pop" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Logic</div>
+                    <div class="stat-lbl">The rules. What happens when you push a button.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Storage</div>
+                    <div class="stat-lbl">The machine's memory. Instance, persistent, or temporary.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Auth</div>
+                    <div class="stat-lbl">require_auth() — verify who's pushing the button.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Events</div>
+                    <div class="stat-lbl">Receipts. A log of everything that happened.</div>
+                </div>
+                <div class="stat highlight-cyan">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Cross-Call</div>
+                    <div class="stat-lbl">Machines can call other machines.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SLIDE: HOW A CONTRACT WORKS INTERNALLY -->
-    <section class="slide" data-slide="18">
+    <section class="slide" data-slide="29">
         <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
             <h2 class="rv">How a Contract Works</h2>
             <svg class="rv-pop" viewBox="0 0 700 340" fill="none" style="max-width: 100%; max-height: min(60vh, 480px);">
@@ -1434,7 +1785,7 @@
          ========================================== -->
 
     <!-- SLIDE: SDF'S MISSION -->
-    <section class="slide" data-slide="19">
+    <section class="slide" data-slide="30">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">Why Do Smart<br>Contracts Matter?</h2>
             <div class="rv" style="font-family: var(--font-mono); font-size: var(--small-size); color: var(--dim); text-transform: uppercase; letter-spacing: 0.15em;">SDF Mission</div>
@@ -1448,7 +1799,7 @@
     </section>
 
     <!-- SLIDE: UNLOCK ANY FINANCIAL SERVICE -->
-    <section class="slide" data-slide="20">
+    <section class="slide" data-slide="31">
         <div class="slide-inner" style="align-items: center; justify-content: center; gap: var(--gap);">
             <h2 class="rv">Examples</h2>
             <div class="stats rv-pop" style="grid-template-columns: repeat(4, 1fr);">
@@ -1504,57 +1855,8 @@
         </div>
     </section>
 
-    <!-- SLIDE: SMART CONTRACTS ON STELLAR TODAY -->
-    <section class="slide" data-slide="21">
-        <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
-            <h2 class="rv">Live on Stellar Today</h2>
-            <div class="rv-pop" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.4rem, 1vw, 0.8rem); max-width: 700px;">
-                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem);">
-                    <div style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: var(--cyan); font-family: var(--font-display); line-height: 1;">Blend</div>
-                    <div class="dim" style="margin-top: 0.3em;">Lending</div>
-                </div>
-                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem);">
-                    <div style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: var(--yellow); font-family: var(--font-display); line-height: 1;">Soroswap</div>
-                    <div class="dim" style="margin-top: 0.3em;">Swaps</div>
-                </div>
-                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem);">
-                    <div style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: var(--pink); font-family: var(--font-display); line-height: 1;">Sushi</div>
-                    <div class="dim" style="margin-top: 0.3em;">Swaps</div>
-                </div>
-                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem);">
-                    <div style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: var(--white); font-family: var(--font-display); line-height: 1;">Reflector</div>
-                    <div class="dim" style="margin-top: 0.3em;">Price Oracle</div>
-                </div>
-                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem);">
-                    <div style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: var(--blue); font-family: var(--font-display); line-height: 1;">Axelar</div>
-                    <div class="dim" style="margin-top: 0.3em;">Bridge</div>
-                </div>
-                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem);">
-                    <div style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: var(--yellow); font-family: var(--font-display); line-height: 1;">FxDAO</div>
-                    <div class="dim" style="margin-top: 0.3em;">Stablecoin</div>
-                </div>
-                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem);">
-                    <div style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: var(--white); font-family: var(--font-display); line-height: 1;">Soroban Domains</div>
-                    <div class="dim" style="margin-top: 0.3em;">Naming Service</div>
-                </div>
-                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem);">
-                    <div style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: var(--cyan); font-family: var(--font-display); line-height: 1;">Kale</div>
-                    <div class="dim" style="margin-top: 0.3em;">Mining Game</div>
-                </div>
-                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem);">
-                    <div style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: var(--yellow); font-family: var(--font-display); line-height: 1;">DeFindex</div>
-                    <div class="dim" style="margin-top: 0.3em;">Index Vaults</div>
-                </div>
-                <div style="display: flex; align-items: center; justify-content: center; grid-column: span 4;">
-                    <span style="font-family: var(--font-mono); font-size: clamp(1.2rem, 2vw, 1.6rem); color: var(--dim); letter-spacing: 0.3em;">. . .</span>
-                </div>
-            </div>
-            <p class="rv" style="color: var(--dim); font-size: var(--small-size); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em;">A small sample — many more are live and being built</p>
-        </div>
-    </section>
-
     <!-- SLIDE: TOKENS CAN REPRESENT ANYTHING -->
-    <section class="slide" data-slide="22">
+    <section class="slide" data-slide="32">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">Tokens Can<br>Represent Anything</h2>
             <p class="rv" style="color: var(--muted); max-width: 800px;">Same interface. Same transfer, balance, approve. Different meaning.</p>
@@ -1585,8 +1887,65 @@
         </div>
     </section>
 
+    <!-- SLIDE: SMART CONTRACTS ON STELLAR TODAY -->
+    <section class="slide" data-slide="33">
+        <div class="slide-inner" style="text-align: center; gap: var(--gap);">
+            <h2 class="rv">Examples on Stellar</h2>
+            <div class="rv-pop" style="display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: clamp(0.4rem, 1vw, 0.8rem);">
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--cyan); font-family: var(--font-display); line-height: 1;">Blend</div>
+                    <div class="dim" style="margin-top: 0.3em;">Lending</div>
+                </div>
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--yellow); font-family: var(--font-display); line-height: 1;">Soroswap</div>
+                    <div class="dim" style="margin-top: 0.3em;">Swaps</div>
+                </div>
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--pink); font-family: var(--font-display); line-height: 1;">Sushi</div>
+                    <div class="dim" style="margin-top: 0.3em;">Swaps</div>
+                </div>
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--white); font-family: var(--font-display); line-height: 1;">Reflector</div>
+                    <div class="dim" style="margin-top: 0.3em;">Price Oracle</div>
+                </div>
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--blue); font-family: var(--font-display); line-height: 1;">Axelar</div>
+                    <div class="dim" style="margin-top: 0.3em;">Bridge</div>
+                </div>
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--yellow); font-family: var(--font-display); line-height: 1;">FxDAO</div>
+                    <div class="dim" style="margin-top: 0.3em;">Stablecoin</div>
+                </div>
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--white); font-family: var(--font-display); line-height: 1;">Soroban Domains</div>
+                    <div class="dim" style="margin-top: 0.3em;">Naming Service</div>
+                </div>
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--cyan); font-family: var(--font-display); line-height: 1;">Kale</div>
+                    <div class="dim" style="margin-top: 0.3em;">Mining Game</div>
+                </div>
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--yellow); font-family: var(--font-display); line-height: 1;">DeFindex</div>
+                    <div class="dim" style="margin-top: 0.3em;">Index Vaults</div>
+                </div>
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--pink); font-family: var(--font-display); line-height: 1;">Soroswap Aggregator</div>
+                    <div class="dim" style="margin-top: 0.3em;">DEX Aggregator</div>
+                </div>
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--white); font-family: var(--font-display); line-height: 1;">Batch Executor</div>
+                    <div class="dim" style="margin-top: 0.3em;">Batch Operations</div>
+                </div>
+                <div class="machine" style="text-align: center; padding: clamp(0.5rem, 1.2vw, 1rem); display: flex; flex-direction: column; justify-content: center; border-color: #222; opacity: 0.5;">
+                    <div style="font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; color: var(--dim); font-family: var(--font-display); line-height: 1; letter-spacing: 0.3em;">...</div>
+                </div>
+            </div>
+            <p class="rv" style="color: var(--dim); font-size: var(--small-size); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em;">A small sample — many more are live and being built</p>
+        </div>
+    </section>
+
     <!-- SLIDE: BEYOND FINANCE -->
-    <section class="slide" data-slide="23">
+    <section class="slide" data-slide="34">
         <div class="slide-inner" style="align-items: center; justify-content: center; gap: var(--gap);">
             <div class="stats rv-pop" style="grid-template-columns: repeat(4, 1fr);">
                 <div class="stat" style="border-color: #222; opacity: 0.75;">
@@ -1658,7 +2017,7 @@
     </section>
 
     <!-- SLIDE: RECAP -->
-    <section class="slide" data-slide="24">
+    <section class="slide" data-slide="35">
         <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
             <h2 class="rv">Recap</h2>
             <svg class="rv-pop" viewBox="0 0 750 320" fill="none" style="max-width: 100%; max-height: min(55vh, 400px);">
@@ -1722,7 +2081,7 @@
          ========================================== -->
 
     <!-- SLIDE: GETTING STARTED -->
-    <section class="slide q-slide" data-slide="25">
+    <section class="slide q-slide" data-slide="36">
         <div class="slide-inner">
             <h1 class="rv">Questions?</h1>
             <p class="rv"><span class="accent">developers.stellar.org</span></p>
@@ -1864,81 +2223,114 @@
            =========================================== */
         const SPEAKER_NOTES = [
             // 0: Title
-            "Welcome everyone. Today we're going to talk about smart contracts on Stellar — what they are, how they work, and why they matter. To set expectations this is not a talk targeting developers. We will not be talking about how to build a smart contract or be doing any coding. This is also not a talk about a specific wallet product, so I'm not demoing anything. Rather we'll be discussing the concepts and basics of what a contract is. To help us understand what a smart contract is, we're going to start by talking about...",
+            "Welcome everyone. Today we're going to talk about smart contracts on Stellar — what they are, how they work, and why they matter. To set expectations this is not a talk targeting developers. We will not be talking about how to build a smart contract or be doing any coding. This is also not a talk about a specific wallet product, so I'm not demoing anything. Rather we'll be discussing the concepts and basics of what a contract is. To help us understand what a smart contract is, we're going to start by taking a look at...",
 
             // 1: Vending Machines
-            "...vending machines. Can I get a show of hands, who has used a vending machine before? Is there anyone who hasn't? Let's relive the experience of using one together.",
+            "...vending machines. Can I get a show of hands, who has used a vending machine before? Is there anyone who hasn't? Okay, so when we use a vending machine, we are swapping our money for something else, like an egg sandwich. To do that, we...",
 
             // 2: Step 1 — Choose
-            "You walk up to the vending machine and look at what's available. You decide what you want — what product you'll swap your money for — and you make your selection.",
+            "...walk up to the vending machine and look at what's available. We decide what we want — what product we'll swap our money for — when we've decided, we'll make our selection.",
 
             // 3: Step 2 — Price
-            "The machine shows you the price. Two dollars. It's well understood that if the machine says two dollars, it will charge you two dollars. There are rules we expect the machine to follow. We don't truly know that it will, but we assume it will.",
+            "The machine shows us a price. Two dollars. And, it's well understood that if the machine says two dollars, it will charge us two dollars. There are rules, a mix of social conventions, laws, and our own experience, that tell us we can expect the machine to give us the product we paid for. We don't truly know that it will, but we assume it will, and we go on.",
 
             // 4: Step 3 — Pay
-            "You pay. You insert the exact amount, or more and expect change. At this point you've committed your money, but you haven't received anything yet.",
+            "We pay. We tap a card, or insert the cash. And we wait.",
 
             // 5: Step 4 — Delivery
-            "The machine executes your request and delivers the product. No cashier, no negotiation — just the machine following its rules. The whole interaction was between you and the machine. So what does this have to do with smart contracts?",
+            "The machine starts to execute our request. It whirrs and moves, and we watch as it delivers the product to us. Using the machine, we swapped something of value, money, for something else of value, an egg sandwich. No cashier, no negotiation — just us with our expectations, and the machine with its rules, executing them. So what does this have to do with smart contracts? Well this is very similar to how smart contracts work.",
 
             // 6: The Ancestor of Smart Contracts
-            "In 1994, a computer scientist named Nick Szabo described the concept of smart contracts. He used the vending machine as an example of a primitive one — self-enforcing logic embedded in technology, eliminating the need for trust between parties. He coined the term more than a decade before Bitcoin or Ethereum existed. He wasn't talking about blockchains specifically, but the ideas map directly. Today, when people say smart contracts, they almost always mean smart contracts on blockchains.",
+            "In 1994, a computer scientist named Nick Szabo coined the term smart contracts, and when describing them used the vending machine as an example of a primitive one. He imagined that smart contracts would come about through embedding self-enforcing logic into technology, and that it would eliminate the need for trust between parties. He coined the term more than a decade before blockchains like Bitcoin, Stellar, or Ethereum existed. He wasn't talking about blockchains specifically, but today blockchains have really owned the term. When you hear people say smart contracts today, they mean smart contracts on blockchains.",
 
             // 7: What Is a Smart Contract?
-            "So what is a smart contract? Take the vending machine — an agreement that enforces itself. Remove the physical hardware, keep only the logic, and put it on a decentralized network that nobody owns. Now anyone, anywhere can use it. That's a smart contract. And the experience of using one follows a similar flow.",
+            "So what is a smart contract? It's an agreement that enforces itself. Take the vending machine, remove the physical hardware, keep only the logic, and put it on a decentralized network. Now anyone, anywhere can use it. That's a smart contract. And the experience of using one follows a similar flow.",
 
             // 8: Calling a Contract — Identify
-            "Just like with a vending machine, the first step is choosing what you want. You find a contract — a swap, a pool, a token — and look at what it can do. In practice this usually happens through a web app, but here we're looking one layer beneath.",
+            "Just like with a vending machine, the first step is choosing what we want. We find a contract — a swap, a pool, a token — and look at what it can do. In practice this usually happens through a web app, but here we're looking one layer beneath.",
 
             // 9: Calling a Contract — Simulate
-            "Next, you simulate. You ask the contract: if I swap 100 USDC, what do I get back? It tells you the outcome before you spend anything. Just like reading the price on the display.",
+            "Next, we simulate. We ask the contract: if I swap 100 USDC, what do I get back? It tells us the outcome before we spend anything. Much like reading the price on the display of a vending machine.",
 
             // 10: Calling a Contract — Submit
-            "Then you submit the transaction. You sign it with your key and send it to the network. This is the moment you commit — your money is on the line.",
+            "Then we authorise and submit the transaction using our wallet. This sends it to the network. This is the moment we commit — our USDC is on the line, in much the same way our cash was when we paid the vending machine. And then we wait for the network to confirm the transaction.",
 
             // 11: Calling a Contract — Execute
-            "Finally, the contract executes. The network runs the code, moves the tokens, and delivers the result. No person decided whether to approve it. The code ran, the rules were followed, and the outcome is final.",
+            "Eventually, the contract executes. The network runs the code, swaps the USDC for the egg sandwich token, and delivers the result. No person decided whether to approve it. The code ran, the rules were followed, and the outcome is final.",
 
             // 12: The Stellar Network
-            "So where do these contracts run? On Stellar. Founded in 2014, Stellar was built for payments and financial access — fast settlement, fraction-of-a-penny fees. Continuing our analogy, think of Stellar as the plaza where vending machines get deployed.",
+            "So where do these contracts run? On Stellar. Founded in 2014, Stellar was built for payments and financial access — fast settlement, fraction-of-a-penny fees. We all work at the Stellar Development Foundation, so I hope none of this is a surprise, that Stellar is a blockchain, and that's where smart contracts execute. Continuing our analogy of vending machines in the physical world, we can think of Stellar as a plaza where vending machines get installed, and people can go to use them.",
 
             // 13: Stellar's OG Vending Machine
-            "For its first decade, Stellar had 26 built-in operations — send payments, create offers, manage trust lines. Like a machine with 26 preset buttons. Very useful, but if you wanted something not on the menu, you had to convince the entire network to add a new button. That technically fits Szabo's definition of a smart contract, but in blockchain terms, smart contracts mean programs anyone can deploy.",
+            "For its first decade, Stellar had 26 built-in operations spanning payments, a decentralised exchange, and account management. You could think of Stellar having a few vending machines and across them were 26 preset buttons that did different things. It was very useful, but if you wanted something not on the menu, you had to convince the Stellar Development Foundation, and the network to add a new button. That technically fits Szabo's definition of a smart contract, but in blockchain terms, smart contracts mean programs anyone can deploy.",
 
             // 14: Soroban: The Programmable Machine
-            "So in 2024, Stellar launched Soroban — the ability for anyone to deploy their own smart contracts. Contracts are written in Rust and compiled to WebAssembly. Instead of 26 fixed buttons, anyone can now build a machine with whatever buttons they want and deploy it onto the network.",
+            "So in 2024, Stellar launched Soroban — the ability for anyone to deploy their own smart contracts. Contracts are written in Rust and compiled to WebAssembly. Instead of 26 fixed buttons, anyone can now build a vending machine that sits in the Stellar plaza with whatever buttons they want.",
 
             // 15: Was Stellar the First?
-            "Was Stellar first? No. Ethereum launched in 2015, the year after Stellar, and defined what a smart contract on a blockchain would be. It proved that programmable contracts on a blockchain could work and now most blockchains offer a smart contract experience that is similar.",
+            "Was Stellar first? No. Ethereum launched in 2015, the year after Stellar first launched and 9 years before Stellar launched smart contracts. Ethereum really defined what a smart contract on a blockchain would be. It proved that programmable contracts on a blockchain could work and now most blockchains offer a smart contract experience that is similar.",
 
-            // 16: Lifecycle of a Smart Contract
-            "Here's how a smart contract goes from idea to production. You code it in Rust, using the soroban-sdk, and you write tests. Then once you think you have a working contract to release, you audit it — and this step is critical. Smart contracts can have bugs, just like vending machines sometimes get jammed. But unlikely a $2 food item getting jammed, when a contract makes a mistake it could be placing millions of dollars worth of value at risk. Audits serve two purposes: they give the creator confidence and a chance to fix bugs. They also address the issue of reputation. When a new contract is released with no reputation, audits help create some confidence in using them. In the same way that we can't look inside a vending machine to see if it will really do what we expect it to, most people can't read and understand smart contract code and verify it does what it claims, so we rely on auditors, evidence, and reputation to close that gap. After audit, you compile it to a WebAssembly file. You upload it to the Stellar network, deploy an instance with its own address and storage, and then people can use it — calling its functions, composing it with other contracts.",
+            // 16: Lifecycle — Overview
+            "Here's how a smart contract goes from idea to production. There are six steps.",
 
-            // 17: The Building Blocks
-            "Every contract is built from the same primitives. Logic — the rules, what happens when you call a function. Storage — the contract's memory. Auth — verifying who's calling. Events — a log of what happened, like receipts. And cross-contract calls — contracts can invoke other contracts. These building blocks come together in a flow that looks like this...",
+            // 17: Lifecycle — Write
+            "First, it gets written in Rust using the soroban-sdk. Ideally what gets built is a mix of the on-chain logic and tests that give the developer confidence it does what they expect.",
 
-            // 18: How a Contract Works
-            "These building blocks come together in a flow that looks like this... Inputs come in — the arguments, like a payment destination address, and an amount. Auth to verify who's authorising the action to take place. The logic runs. State gets loaded, read, then updated. A result comes back and is returned. And events are published.",
+            // 18: Lifecycle — Audit
+            "Once the developer thinks it's ready, it gets audited — and this step is critical. Smart contracts can have bugs, just like vending machines sometimes get jammed. But unlike a $2 item getting stuck, a contract bug could put millions of dollars at risk. Audits serve two purposes: they give the creator a chance to find and fix bugs, and they build reputation. Most people can't read smart contract code and verify it does what it claims, so we rely on auditors, evidence, and reputation to close that gap.",
 
-            // 19: Why Do Smart Contracts Matter?
+            // 19: Lifecycle — Compile
+            "After audit, the contract gets compiled into a WebAssembly file — a .wasm. This is portable, deterministic bytecode that the network can execute.",
+
+            // 20: Lifecycle — Upload
+            "The .wasm file gets uploaded to the Stellar network. At this point the code is on-chain, but it's not running yet — it's just stored, ready to be instantiated.",
+
+            // 21: Lifecycle — Deploy
+            "Anyone can deploy an instance of that uploaded code. Each instance gets its own contract address and its own storage. Think of it as an isolated copy of the machine, running independently.",
+
+            // 22: Lifecycle — Use
+            "And then people use it — calling its functions, interacting with it, composing it with other contracts. This is where the contract starts doing real work.",
+
+            // 23: Building Blocks — Overview
+            "Every contract is built from the same primitives. Let's walk through each one.",
+
+            // 24: Building Blocks — Logic
+            "First: logic. This is the code that defines the rules — what happens when someone calls a function on the contract.",
+
+            // 25: Building Blocks — Storage
+            "Storage is the contract's memory. Data that persists between calls. On Stellar there are three types: instance, persistent, and temporary — each with different lifetimes and costs.",
+
+            // 26: Building Blocks — Auth
+            "Auth — verifying who's calling. The require_auth function checks that the caller has signed the transaction. This is how contracts enforce permissions.",
+
+            // 27: Building Blocks — Events
+            "Events are like receipts. A log of what happened during the call. Off-chain systems — wallets, explorers, analytics — consume these to track activity.",
+
+            // 28: Building Blocks — Cross-Call
+            "And cross-contract calls. Contracts can invoke other contracts. A swap contract calls token contracts. A lending contract calls price oracles. This composability is what makes the ecosystem powerful. These building blocks come together in a flow that looks like this...",
+
+            // 29: How a Contract Works
+            "These building blocks come together in a flow that looks like this... When calling a contract, inputs come in. In a payment using a token contract this might be a sender address, a destination address, and an amount. Auth to verify who's authorising the action to take place. It's super important that for the payment that the contract checks that the sender authorised the payment. The logic runs. State, like account balances, gets loaded, read, then updated. A result comes back and is returned to the caller. And events are published for off-chain systems to consume.",
+
+            // 30: Why Do Smart Contracts Matter?
             "So why does all this matter? The Stellar Development Foundation's mission is to create equitable access to the global financial system. Smart contracts are a key tool for that — they let anyone build financial services that are open, transparent, and accessible.",
 
-            // 20: Unlock Any Financial Service
+            // 31: Unlock Any Financial Service
             "Smart contracts on Stellar are designed to power any financial service — tokens, swaps, lending, liquidity pools, insurance, payments, savings, escrow, and more. Anything you can describe as a set of rules, you can build as a contract. Of all those things, tokens are really the core building block and a concept you'll hear of frequently.",
 
-            // 21: Live on Stellar Today
+            // 32: Tokens Can Represent Anything
+            "A token is a digital unit that represents some form of value, a right, or an asset. And a token contract tracks ownership of that token. The storage of a token contract is typically a big table listing each account holder and what balance they hold. Operations on the token contract like a transfer update the rows in that table. If I send $10 to you, my row will be reduce by $10, and yours will be increased by $10. Tokens get used in all of the other services listed on the previous screen. When you hear terms like USDC, or PYUSD, both of these things are tokens.",
+
+            // 33: Examples on Stellar
             "These aren't hypotheticals — there are real smart contracts live on Stellar right now. Blend is a lending protocol. Soroswap and Sushi handle swaps. Reflector provides price data as an oracle. Axelar bridges assets from other chains. FxDAO creates stablecoins. Soroban Domains is a naming service. Kale is a game built entirely on-chain. And DeFindex provides index vaults. This ecosystem is growing fast.",
 
-            // 22: Tokens Can Represent Anything
-            "A token is a digital unit that represents some form of value, a right, or an asset. And a token contract tracks ownership of that token. Tokens get used in all of the other services listed on the previous screen. When you hear terms like USDC, or PYUSD, both of these things are tokens.",
-
-            // 23: Beyond Finance
+            // 34: Beyond Finance
             "The focus for us at SDF is financial services, because our mission is about access to the global financial system. But what's possible with smart contracts goes beyond finance. There are many other things that people are using blockchain for: voting, supply chain tracking, gaming items, digital identity — anywhere you need rules that enforce themselves, a smart contract can do the job.",
 
-            // 24: Recap
+            // 35: Recap
             "To bring it all together: we talked about vending machines — how they are a self-enforcing system, of rules defined in hardware. A smart contract on a blockchain is the same idea in software, running on a decentralized network. On Stellar, smart contracts unlock every kind of financial service, they enable anyone to build financial services and anyone to integrate other financial systems. And this is all in service of the mission — to create equitable access to the global financial system.",
 
-            // 25: Questions
+            // 36: Questions
             "I said at the beginning this talk wasn't for developers, but if you want to get hands on and build your own contract and deploy it to testnet, developers.stellar.org has everything you need. Questions?"
         ];
 
