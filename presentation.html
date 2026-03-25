@@ -617,7 +617,7 @@
            =========================================== */
         .kb-hint {
             position: fixed;
-            bottom: calc(clamp(0.5rem, 1.5vw, 1rem) + 40px);
+            bottom: clamp(0.5rem, 1.5vw, 1rem);
             left: 50%;
             transform: translateX(-50%);
             font-family: var(--font-mono);
@@ -644,12 +644,12 @@
            =========================================== */
         .inline-notes {
             position: fixed;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
             max-height: 30vh;
             background: var(--dark);
-            border-top: 2px solid var(--border);
+            border-bottom: 2px solid var(--border);
             padding: 10px 20px;
             z-index: 200;
             display: flex;
@@ -659,7 +659,7 @@
         }
 
         .inline-notes.hidden {
-            transform: translateY(100%);
+            transform: translateY(-100%);
         }
 
         .inline-notes-header {
@@ -1013,24 +1013,8 @@
     </section>
 
     <!-- SLIDE 7: WHY VENDING MACHINES? — THE AGREEMENT -->
+    <!-- SLIDE: NICK SZABO / ANCESTOR -->
     <section class="slide" data-slide="6">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">A Vending Machine<br>Is an Agreement</h2>
-            <p class="rv" style="color: var(--muted); font-style: italic; margin-bottom: var(--gap-sm);">
-                "If you put in the right amount of money, you will get something out."
-            </p>
-            <ul class="items">
-                <li class="rv" style="--i:0">First implemented in <strong>hardware</strong> — gears, springs, coin slots</li>
-                <li class="rv" style="--i:1">Now most vending machines run <strong>software</strong> too</li>
-                <li class="rv" style="--i:2">No middleman. The machine <strong>is</strong> the agreement</li>
-                <li class="rv" style="--i:3">What if we could put this pattern <strong class="accent">on a computer network</strong>?</li>
-            </ul>
-        </div>
-    </section>
-
-
-    <!-- SLIDE 4: NICK SZABO / ANCESTOR -->
-    <section class="slide" data-slide="7">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">The Ancestor of<br>Smart Contracts</h2>
             <div style="display: flex; gap: clamp(1rem, 3vw, 2.5rem); align-items: flex-start; flex-wrap: wrap;">
@@ -1047,8 +1031,8 @@
         </div>
     </section>
 
-    <!-- SLIDE 5: WHAT IS A SMART CONTRACT? -->
-    <section class="slide" data-slide="8">
+    <!-- SLIDE: WHAT IS A SMART CONTRACT? -->
+    <section class="slide" data-slide="7">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">What Is a<br>Smart Contract?</h2>
             <div style="display: flex; flex-direction: column; gap: var(--gap-sm); max-width: 900px;">
@@ -1067,7 +1051,7 @@
     </section>
 
     <!-- CALLING A CONTRACT: STEP 1 — IDENTIFY -->
-    <section class="slide" data-slide="9">
+    <section class="slide" data-slide="8">
         <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
             <div class="tag rv">Step 1 of 4</div>
             <h2 class="rv" style="margin-bottom: 0;">Identify</h2>
@@ -1104,7 +1088,7 @@
     </section>
 
     <!-- CALLING A CONTRACT: STEP 2 — SIMULATE -->
-    <section class="slide" data-slide="10">
+    <section class="slide" data-slide="9">
         <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
             <div class="tag rv">Step 2 of 4</div>
             <h2 class="rv" style="margin-bottom: 0;">Simulate</h2>
@@ -1145,7 +1129,7 @@
     </section>
 
     <!-- CALLING A CONTRACT: STEP 3 — SUBMIT -->
-    <section class="slide" data-slide="11">
+    <section class="slide" data-slide="10">
         <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
             <div class="tag rv">Step 3 of 4</div>
             <h2 class="rv" style="margin-bottom: 0;">Submit</h2>
@@ -1191,7 +1175,7 @@
     </section>
 
     <!-- CALLING A CONTRACT: STEP 4 — EXECUTE -->
-    <section class="slide" data-slide="12">
+    <section class="slide" data-slide="11">
         <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
             <div class="tag rv">Step 4 of 4</div>
             <h2 class="rv" style="margin-bottom: 0;">Execute</h2>
@@ -1236,7 +1220,7 @@
     </section>
 
     <!-- SLIDE 6: THE STELLAR NETWORK -->
-    <section class="slide" data-slide="13">
+    <section class="slide" data-slide="12">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">The Stellar<br>Network</h2>
             <p class="rv" style="max-width: 900px;">
@@ -1269,7 +1253,7 @@
          ========================================== -->
 
     <!-- SLIDE 7: STELLAR'S OLD MACHINE -->
-    <section class="slide" data-slide="14">
+    <section class="slide" data-slide="13">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">Stellar's OG<br>Vending Machine</h2>
             <div style="display: flex; gap: clamp(1rem, 3vw, 2rem); align-items: center; flex-wrap: wrap;">
@@ -1290,7 +1274,7 @@
     </section>
 
     <!-- SLIDE 8: SOROBAN -->
-    <section class="slide" data-slide="15">
+    <section class="slide" data-slide="14">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">Soroban:<br>The Programmable<br>Machine</h2>
             <div style="display: flex; gap: clamp(1rem, 3vw, 2rem); align-items: center; flex-wrap: wrap;">
@@ -1312,7 +1296,7 @@
     </section>
 
     <!-- SLIDE: WAS STELLAR THE FIRST? -->
-    <section class="slide" data-slide="16">
+    <section class="slide" data-slide="15">
         <div class="slide-inner" style="gap: var(--gap);">
             <h2 class="rv">Was Stellar the First<br>Smart Contract Platform?</h2>
             <p class="rv" style="font-size: clamp(1.3rem, 3vw, 1.8rem);">No.</p>
@@ -1326,7 +1310,39 @@
         </div>
     </section>
 
-    <!-- SLIDE 9: ANATOMY OF A SOROBAN CONTRACT -->
+    <!-- SLIDE: LIFECYCLE OF A SMART CONTRACT -->
+    <section class="slide" data-slide="16">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Lifecycle of Smart<br>Contract Development</h2>
+            <div class="rv-pop" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1vw, 0.8rem); max-width: 600px; margin: 0 auto;">
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">1. Write</div>
+                    <div class="dim">Code + Tests</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--cyan);">2. Audit</div>
+                    <div class="dim">Review +<br>Verify</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">3. Compile</div>
+                    <div class="dim">.wasm file</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">4. Upload</div>
+                    <div class="dim">To the network</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">5. Deploy</div>
+                    <div class="dim">Create an instance</div>
+                </div>
+                <div class="machine" style="text-align: center;">
+                    <div class="name" style="color: var(--yellow);">6. Use</div>
+                    <div class="dim">Call, interact, compose</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SLIDE: THE BUILDING BLOCKS -->
     <section class="slide" data-slide="17">
         <div class="slide-inner" style="gap: var(--gap);">
@@ -1357,18 +1373,90 @@
         </div>
     </section>
 
+    <!-- SLIDE: HOW A CONTRACT WORKS INTERNALLY -->
+    <section class="slide" data-slide="18">
+        <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
+            <h2 class="rv">How a Contract Works</h2>
+            <svg class="rv-pop" viewBox="0 0 700 360" fill="none" style="max-width: 100%; max-height: min(55vh, 440px);">
+                <!-- Contract box (center) -->
+                <rect x="220" y="80" width="260" height="200" fill="#111" stroke="#DFFF00" stroke-width="3" rx="4"/>
+                <text x="350" y="120" fill="#DFFF00" font-family="monospace" font-size="16" font-weight="700" text-anchor="middle">Contract</text>
+                <line x1="240" y1="130" x2="460" y2="130" stroke="#2a2a2a" stroke-width="1.5"/>
+
+                <!-- Logic inside -->
+                <text x="350" y="158" fill="#ccc" font-family="monospace" font-size="11" text-anchor="middle">Logic (rules)</text>
+
+                <!-- State inside -->
+                <rect x="260" y="170" width="180" height="35" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5" rx="3"/>
+                <text x="350" y="193" fill="#777" font-family="monospace" font-size="11" text-anchor="middle">State (storage)</text>
+
+                <!-- Mutate arrow (circular, state to state) -->
+                <path d="M 445 187 C 470 187 470 210 445 210" stroke="#ff6ec7" stroke-width="1.5" fill="none"/>
+                <polygon points="445,210 452,204 452,216" fill="#ff6ec7"/>
+                <text x="500" y="202" fill="#ff6ec7" font-family="monospace" font-size="9" text-anchor="start">mutate</text>
+
+                <!-- Inputs (left side) -->
+                <!-- Auth badge on input -->
+                <rect x="30" y="130" width="70" height="22" fill="#0a0a0a" stroke="#4d9fff" stroke-width="1.5" rx="3"/>
+                <text x="65" y="145" fill="#4d9fff" font-family="monospace" font-size="9" text-anchor="middle">auth</text>
+
+                <rect x="30" y="162" width="70" height="22" fill="#0a0a0a" stroke="#DFFF00" stroke-width="1.5" rx="3"/>
+                <text x="65" y="177" fill="#DFFF00" font-family="monospace" font-size="9" text-anchor="middle">args</text>
+
+                <!-- Input arrows -->
+                <line x1="100" y1="141" x2="220" y2="160" stroke="#4d9fff" stroke-width="2"/>
+                <polygon points="220,160 210,154 210,166" fill="#4d9fff"/>
+                <line x1="100" y1="173" x2="220" y2="175" stroke="#DFFF00" stroke-width="2"/>
+                <polygon points="220,175 210,169 210,181" fill="#DFFF00"/>
+
+                <text x="65" y="120" fill="#f0f0f0" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">Inputs</text>
+
+                <!-- Outputs (right side, top) -->
+                <rect x="600" y="135" width="80" height="22" fill="#0a0a0a" stroke="#00ffd5" stroke-width="1.5" rx="3"/>
+                <text x="640" y="150" fill="#00ffd5" font-family="monospace" font-size="9" text-anchor="middle">result</text>
+
+                <line x1="480" y1="155" x2="600" y2="146" stroke="#00ffd5" stroke-width="2"/>
+                <polygon points="600,146 590,140 590,152" fill="#00ffd5"/>
+
+                <text x="640" y="125" fill="#f0f0f0" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">Outputs</text>
+
+                <!-- Events (right side, bottom) -->
+                <rect x="600" y="185" width="80" height="22" fill="#0a0a0a" stroke="#ff6ec7" stroke-width="1.5" rx="3"/>
+                <text x="640" y="200" fill="#ff6ec7" font-family="monospace" font-size="9" text-anchor="middle">events</text>
+
+                <!-- Event arrow from contract bottom-right -->
+                <line x1="480" y1="230" x2="600" y2="196" stroke="#ff6ec7" stroke-width="2" stroke-dasharray="5,3"/>
+                <polygon points="600,196 590,190 590,202" fill="#ff6ec7"/>
+
+                <!-- Labels below -->
+                <text x="350" y="310" fill="#444" font-family="monospace" font-size="10" text-anchor="middle">Auth verifies who's calling. Logic runs. State updates. Events publish.</text>
+            </svg>
+        </div>
+    </section>
+
     <!-- ==========================================
          ACT 3: MACHINES YOU CAN BUILD
          ========================================== -->
 
+    <!-- SLIDE: SDF'S MISSION -->
+    <section class="slide" data-slide="19">
+        <div class="slide-inner" style="gap: var(--gap);">
+            <h2 class="rv">Why Do Smart<br>Contracts Matter?</h2>
+            <p class="big rv" style="max-width: 800px;">
+                Create equitable access<br>to the <span class="accent">global financial system</span>.
+            </p>
+            <p class="rv" style="color: var(--muted); max-width: 700px;">
+                SDF mission. Smart contracts let anyone build the financial services that make this possible.
+            </p>
+        </div>
+    </section>
+
     <!-- SLIDE: UNLOCK ANY FINANCIAL SERVICE -->
-    <section class="slide" data-slide="18">
-        <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
-            <h2 class="rv">The Purpose:<br>Unlock Any<br>Financial Service</h2>
-            <p class="rv" style="color: var(--muted); max-width: 800px;">Smart contracts on Stellar exist to support and unlock financial services that anyone can build, deploy, and use.</p>
-            <div class="stats rv-pop" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="stat">
-                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Tokens</div>
+    <section class="slide" data-slide="20">
+        <div class="slide-inner" style="align-items: center; justify-content: center; gap: var(--gap);">
+            <div class="stats rv-pop" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="stat" style="border-color: var(--cyan);">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: var(--cyan);">Tokens</div>
                     <div class="stat-lbl">Create and manage any digital asset</div>
                 </div>
                 <div class="stat">
@@ -1391,46 +1479,30 @@
                     <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Payments</div>
                     <div class="stat-lbl">Programmable money flows and splits</div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE: A BASIC SWAP — THE SODA MACHINE -->
-    <section class="slide" data-slide="19">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">A Basic Swap:<br>The Soda Machine</h2>
-            <p class="rv" style="color: var(--muted);">The simplest vending machine: put something in, get something out.</p>
-            <div class="machine rv-pop">
-                <div class="name">Soda Machine</div>
-                <div>Alice inserts <span class="val">$2.00</span></div>
-                <div>Alice presses <span class="val">B4</span></div>
-                <div>Machine dispenses <span class="val">1 Soda</span></div>
-                <div class="dim">Machine returns $0.25 change</div>
-            </div>
-            <div class="log rv" style="margin-top: var(--gap-sm);">
-                <div class="log-header">Receipt</div>
-                <div class="ln"><span class="t grn">Event</span> <span class="v">received $2.00 from Alice</span></div>
-                <div class="ln"><span class="t blu">Event</span> <span class="v">dispensed 1 Soda to Alice</span></div>
-                <div class="ln"><span class="t ylw">Event</span> <span class="v">returned $0.25 to Alice</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE: A TOKEN MACHINE -->
-    <section class="slide" data-slide="20">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">A Token Machine</h2>
-            <p class="rv" style="color: var(--muted);">A machine that <strong>creates</strong> tokens and tracks who holds them.</p>
-            <div class="machine rv-pop">
-                <div class="name">Token Machine</div>
-                <div>Token: <span class="val">LOYALTY</span></div>
-                <div>Total supply: <span class="val">0</span> <span class="dim">(so far)</span></div>
-                <div class="dim" style="margin-top: 0.3em;">Buttons: mint, transfer, burn</div>
-            </div>
-            <div class="log rv" style="margin-top: var(--gap-sm);">
-                <div class="ln"><span class="t grn">Mint</span> <span class="v">minted 1,000 LOYALTY to Alice</span></div>
-                <div class="ln"><span class="t blu">Transfer</span> <span class="v">Alice transferred 200 LOYALTY to Bob</span></div>
-                <div class="ln"><span class="t red">Burn</span> <span class="v">Bob burned 200 LOYALTY for a reward</span></div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Savings</div>
+                    <div class="stat-lbl">Earn yield on deposited assets</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Escrow</div>
+                    <div class="stat-lbl">Hold funds until conditions are met</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Payroll</div>
+                    <div class="stat-lbl">Automated recurring distributions</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Crowdfund</div>
+                    <div class="stat-lbl">Raise capital with transparent rules</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Invoicing</div>
+                    <div class="stat-lbl">Programmable billing and settlement</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Custody</div>
+                    <div class="stat-lbl">Multi-sig and programmable access control</div>
+                </div>
             </div>
         </div>
     </section>
@@ -1467,158 +1539,135 @@
         </div>
     </section>
 
-    <!-- SLIDE 16: TWO MACHINES, ONE SWAP -->
-    <section class="slide" data-slide="22">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">Two Machines,<br>One Swap</h2>
-            <p class="rv" style="color: var(--muted);">Alice wants to swap USDC for EURC. That takes <strong>two</strong> machines working together.</p>
-            <div class="dia-row rv-pop">
-                <div class="machine" style="flex: 1;">
-                    <div class="name">USDC Token</div>
-                    <div>Holds <span class="val">USDC balances</span></div>
-                </div>
-                <div class="connector">
-                    <span class="arr">&harr;</span>
-                    <span>SWAP</span>
-                </div>
-                <div class="machine" style="flex: 1;">
-                    <div class="name">EURC Token</div>
-                    <div>Holds <span class="val">EURC balances</span></div>
-                </div>
-            </div>
-            <div class="log rv" style="margin-top: var(--gap-sm);">
-                <div class="log-header">Events from three contracts</div>
-                <div class="ln"><span class="t pnk">Swap</span> <span class="v">swap 100 USDC for 84.75 EURC for Alice</span></div>
-                <div class="ln"><span class="t blu">USDC</span> <span class="v">transferred 100 USDC from Alice to Pool</span></div>
-                <div class="ln"><span class="t grn">EURC</span> <span class="v">transferred 84.75 EURC from Pool to Alice</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE: WHY ATOMIC MATTERS -->
-    <section class="slide" data-slide="23">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">Why Atomic<br>Matters</h2>
-            <div style="display: flex; flex-direction: column; gap: var(--gap);">
-                <div class="machine rv-pop">
-                    <div class="name" style="color: var(--cyan);">Success</div>
-                    <div>Alice sends <span class="val">100 USDC</span> &rarr; Bob</div>
-                    <div>Bob sends <span class="val">84.75 EURC</span> &rarr; Alice</div>
-                    <div class="dim">Both sides execute. Done.</div>
-                </div>
-                <div class="machine rv-pop">
-                    <div class="name" style="color: var(--red);">Failure</div>
-                    <div>Alice sends <span class="val">100 USDC</span> &rarr; Bob</div>
-                    <div>Bob's transfer <span style="color: var(--red);">fails</span></div>
-                    <div class="dim">Everything rolls back. Alice keeps her USDC.</div>
-                </div>
-            </div>
-            <div class="rv" style="margin-top: var(--gap); border-top: 3px solid var(--yellow); padding-top: var(--gap);">
-                <p class="big">
-                    Both sides execute, or <span class="accent">neither does</span>.<br>
-                    Trust the machine, not the counterparty.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 19: A LIQUIDITY POOL -->
-    <section class="slide" data-slide="24">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">A Liquidity Pool</h2>
-            <p class="rv" style="color: var(--muted);">A machine where people <strong>deposit</strong> assets so others can <strong>swap</strong>.</p>
-            <div class="machine rv-pop">
-                <div class="name">Liquidity Pool</div>
-                <div>Contains: <span class="val">10,000 USDC</span> + <span class="val">8,475 EURC</span></div>
-                <div class="dim">Depositors earn fees from every swap</div>
-            </div>
-            <div class="log rv" style="margin-top: var(--gap-sm);">
-                <div class="log-header">The Story</div>
-                <div class="ln"><span class="t grn">Deposit</span> <span class="v">Alice deposited 1,000 USDC + 847 EURC</span></div>
-                <div class="ln"><span class="t blu">Swap</span> <span class="v">Bob swapped 100 USDC for 84.75 EURC (fee: 0.3%)</span></div>
-                <div class="ln"><span class="t pnk">Swap</span> <span class="v">Carol swapped 50 EURC for 58.90 USDC (fee: 0.3%)</span></div>
-                <div class="ln"><span class="t ylw">Withdraw</span> <span class="v">Alice withdrew her share + accumulated fees</span></div>
-            </div>
-        </div>
-    </section>
-
     <!-- SLIDE: BEYOND FINANCE -->
-    <section class="slide" data-slide="25">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">Beyond Finance:<br>What Else?</h2>
-            <p class="rv" style="color: var(--muted);">The vending machine pattern works for anything with rules.</p>
-            <div class="stats rv-pop" style="grid-template-columns: repeat(2, 1fr);">
+    <section class="slide" data-slide="22">
+        <div class="slide-inner" style="align-items: center; justify-content: center; gap: var(--gap);">
+            <div class="stats rv-pop" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Tokens</div>
+                    <div class="stat-lbl" style="color: #333;">Create and manage any digital asset</div>
+                </div>
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Swaps</div>
+                    <div class="stat-lbl" style="color: #333;">Exchange one asset for another</div>
+                </div>
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Lending</div>
+                    <div class="stat-lbl" style="color: #333;">Borrow and lend with programmable terms</div>
+                </div>
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Liquidity</div>
+                    <div class="stat-lbl" style="color: #333;">Pool assets so anyone can trade</div>
+                </div>
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Insurance</div>
+                    <div class="stat-lbl" style="color: #333;">Automated payouts when conditions are met</div>
+                </div>
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Payments</div>
+                    <div class="stat-lbl" style="color: #333;">Programmable money flows and splits</div>
+                </div>
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Savings</div>
+                    <div class="stat-lbl" style="color: #333;">Earn yield on deposited assets</div>
+                </div>
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Escrow</div>
+                    <div class="stat-lbl" style="color: #333;">Hold funds until conditions are met</div>
+                </div>
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Payroll</div>
+                    <div class="stat-lbl" style="color: #333;">Automated recurring distributions</div>
+                </div>
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Crowdfund</div>
+                    <div class="stat-lbl" style="color: #333;">Raise capital with transparent rules</div>
+                </div>
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Invoicing</div>
+                    <div class="stat-lbl" style="color: #333;">Programmable billing and settlement</div>
+                </div>
+                <div class="stat" style="border-color: #222; opacity: 0.75;">
+                    <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem); color: #555;">Custody</div>
+                    <div class="stat-lbl" style="color: #333;">Multi-sig and programmable access control</div>
+                </div>
                 <div class="stat">
                     <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Voting</div>
-                    <div class="stat-lbl">Transparent governance. Votes are on-chain, auditable by anyone.</div>
+                    <div class="stat-lbl">Transparent, auditable governance</div>
                 </div>
                 <div class="stat">
                     <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Supply Chain</div>
-                    <div class="stat-lbl">Track provenance. Each step recorded, immutable.</div>
+                    <div class="stat-lbl">Track provenance, each step immutable</div>
                 </div>
                 <div class="stat">
                     <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Gaming</div>
-                    <div class="stat-lbl">In-game items as tokens. Trade, sell, own for real.</div>
+                    <div class="stat-lbl">In-game items as real tradeable tokens</div>
                 </div>
                 <div class="stat">
                     <div class="stat-val" style="font-size: clamp(1rem, 2vw, 1.5rem);">Identity</div>
-                    <div class="stat-lbl">Verifiable credentials. Prove things without revealing everything.</div>
+                    <div class="stat-lbl">Prove things without revealing everything</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE: BUT WHY DO WE TRUST IT? -->
-    <section class="slide" data-slide="26">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">But Why Does<br>It Work?</h2>
-            <p class="rv" style="color: var(--muted); font-style: italic; margin-bottom: var(--gap-sm);">
-                Because we <strong>trust</strong> it.
-            </p>
-            <ul class="items">
-                <li class="rv" style="--i:0">Blockchains are sold as <strong>"trustless"</strong></li>
-                <li class="rv" style="--i:1">But you can't really escape trust</li>
-                <li class="rv" style="--i:2">Most of us can't open a vending machine and inspect every gear, spring, and circuit</li>
-                <li class="rv" style="--i:3">Most of us can't read a smart contract and know <strong class="accent">for certain</strong> it does what we expect</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- SLIDE: PRODUCTS GET STUCK -->
-    <section class="slide" data-slide="27">
+    <!-- SLIDE: RECAP -->
+    <section class="slide" data-slide="23">
         <div class="slide-inner" style="align-items: center; text-align: center; gap: var(--gap);">
-            <h2 class="rv">Sometimes the<br>Product Gets Stuck</h2>
-            <p class="rv" style="font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--muted); max-width: 700px;">
-                You've seen it — the spiral turns, the bag tilts… and just hangs there.
-            </p>
-            <p class="rv" style="font-size: clamp(1.3rem, 3vw, 1.8rem); max-width: 700px; margin-top: var(--gap-sm);">
-                Smart contracts have bugs too.
-            </p>
-            <p class="rv" style="font-size: clamp(1rem, 2vw, 1.3rem); color: var(--muted); max-width: 700px; margin-top: var(--gap-sm);">
-                So we patch trust with <strong>auditors</strong>, <strong>evidence</strong>, and <strong>reputation</strong>.<br>
-                Decentralized doesn't mean trust-free.<br>
-                <strong class="accent">Trust, but verify.</strong>
-            </p>
-        </div>
-    </section>
+            <h2 class="rv">Recap</h2>
+            <svg class="rv-pop" viewBox="0 0 750 320" fill="none" style="max-width: 100%; max-height: min(55vh, 400px);">
+                <!-- Vending Machine (left) -->
+                <rect x="20" y="40" width="140" height="120" fill="#111" stroke="#2a2a2a" stroke-width="2" rx="4"/>
+                <rect x="20" y="40" width="4" height="120" fill="#DFFF00"/>
+                <text x="90" y="75" fill="#DFFF00" font-family="monospace" font-size="10" font-weight="700" text-anchor="middle">Vending Machine</text>
+                <text x="90" y="100" fill="#777" font-family="monospace" font-size="9" text-anchor="middle">Rules in hardware</text>
+                <text x="90" y="118" fill="#777" font-family="monospace" font-size="9" text-anchor="middle">Self-enforcing</text>
+                <text x="90" y="136" fill="#777" font-family="monospace" font-size="9" text-anchor="middle">No middleman</text>
 
-    <!-- SLIDE 23: THE PATTERN IS ALWAYS THE SAME -->
-    <section class="slide" data-slide="28">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">The Pattern Is<br>Always the Same</h2>
-            <ul class="items">
-                <li class="rv" style="--i:0">A simple vending machine — <strong>money in, soda out</strong></li>
-                <li class="rv" style="--i:1">A token machine — <strong>create, transfer, burn</strong></li>
-                <li class="rv" style="--i:2">Two machines working together to <strong>swap currencies</strong></li>
-                <li class="rv" style="--i:3">A pool where people <strong>deposit assets and earn fees</strong></li>
-                <li class="rv" style="--i:4">Voting, supply chain, gaming, identity — <strong>rules enforced by code</strong></li>
-            </ul>
-            <div class="rv" style="margin-top: var(--gap); border-top: 3px solid var(--yellow); padding-top: var(--gap);">
-                <p class="big">
-                    Each one is just an <span class="accent">agreement that enforces itself</span>.<br>
-                    Open, transparent, no gatekeepers.
-                </p>
-            </div>
+                <!-- Arrow -->
+                <line x1="175" y1="100" x2="225" y2="100" stroke="#DFFF00" stroke-width="2"/>
+                <polygon points="225,100 215,94 215,106" fill="#DFFF00"/>
+
+                <!-- Smart Contract (center) -->
+                <rect x="240" y="20" width="180" height="160" fill="#111" stroke="#DFFF00" stroke-width="2.5" rx="4"/>
+                <rect x="240" y="20" width="4" height="160" fill="#DFFF00"/>
+                <text x="330" y="50" fill="#DFFF00" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">Smart Contract</text>
+                <line x1="255" y1="58" x2="405" y2="58" stroke="#2a2a2a" stroke-width="1"/>
+                <text x="330" y="78" fill="#ccc" font-family="monospace" font-size="9" text-anchor="middle">Rules in code</text>
+                <text x="330" y="96" fill="#ccc" font-family="monospace" font-size="9" text-anchor="middle">On a network nobody owns</text>
+                <text x="330" y="114" fill="#ccc" font-family="monospace" font-size="9" text-anchor="middle">Anyone can use it</text>
+                <text x="330" y="140" fill="#00ffd5" font-family="monospace" font-size="9" text-anchor="middle">Write → Audit → Compile</text>
+                <text x="330" y="158" fill="#00ffd5" font-family="monospace" font-size="9" text-anchor="middle">Upload → Deploy → Use</text>
+
+                <!-- Arrow -->
+                <line x1="435" y1="100" x2="485" y2="100" stroke="#DFFF00" stroke-width="2"/>
+                <polygon points="485,100 475,94 475,106" fill="#DFFF00"/>
+
+                <!-- Unlocked Services (right) -->
+                <rect x="500" y="20" width="230" height="160" fill="#111" stroke="#2a2a2a" stroke-width="2" rx="4"/>
+                <rect x="500" y="20" width="4" height="160" fill="#DFFF00"/>
+                <text x="615" y="50" fill="#DFFF00" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">Unlocked Services</text>
+                <line x1="515" y1="58" x2="715" y2="58" stroke="#2a2a2a" stroke-width="1"/>
+                <text x="555" y="78" fill="#ccc" font-family="monospace" font-size="9" text-anchor="start">Tokens</text>
+                <text x="555" y="96" fill="#ccc" font-family="monospace" font-size="9" text-anchor="start">Swaps</text>
+                <text x="555" y="114" fill="#ccc" font-family="monospace" font-size="9" text-anchor="start">Lending</text>
+                <text x="555" y="132" fill="#ccc" font-family="monospace" font-size="9" text-anchor="start">Liquidity</text>
+                <text x="660" y="78" fill="#ccc" font-family="monospace" font-size="9" text-anchor="start">Payments</text>
+                <text x="660" y="96" fill="#ccc" font-family="monospace" font-size="9" text-anchor="start">Insurance</text>
+                <text x="660" y="114" fill="#ccc" font-family="monospace" font-size="9" text-anchor="start">Voting</text>
+                <text x="660" y="132" fill="#ccc" font-family="monospace" font-size="9" text-anchor="start">Identity</text>
+                <text x="615" y="162" fill="#777" font-family="monospace" font-size="8" text-anchor="middle">...and anything with rules</text>
+
+                <!-- Stellar bar at bottom -->
+                <rect x="240" y="220" width="420" height="50" fill="#111" stroke="#2a2a2a" stroke-width="2" rx="4"/>
+                <rect x="240" y="220" width="4" height="50" fill="#DFFF00"/>
+                <text x="450" y="242" fill="#DFFF00" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">Stellar Network</text>
+                <text x="450" y="260" fill="#777" font-family="monospace" font-size="9" text-anchor="middle">SDF mission: equitable access to the global financial system</text>
+
+                <!-- Dashed lines connecting contract and services to Stellar -->
+                <line x1="330" y1="180" x2="330" y2="220" stroke="#2a2a2a" stroke-width="1.5" stroke-dasharray="4,3"/>
+                <line x1="615" y1="180" x2="615" y2="220" stroke="#2a2a2a" stroke-width="1.5" stroke-dasharray="4,3"/>
+            </svg>
         </div>
     </section>
 
@@ -1626,48 +1675,11 @@
          ACT 4: WRAP UP
          ========================================== -->
 
-    <!-- SLIDE 24: FROM GEARS TO CODE -->
-    <section class="slide" data-slide="29">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">From Gears<br>to Code</h2>
-            <div class="tl">
-                <div class="tl-item rv"><span class="yr">1880s</span> — Mechanical vending machines. Gears and springs enforce the deal.</div>
-                <div class="tl-item rv"><span class="yr">1994</span> — Nick Szabo sees the pattern. Calls it a "smart contract."</div>
-                <div class="tl-item rv"><span class="yr">2009</span> — Bitcoin. The first programmable money, but limited scripting.</div>
-                <div class="tl-item rv"><span class="yr">2014</span> — Stellar launches. Fast payments, built-in DEX. 26 buttons.</div>
-                <div class="tl-item hot rv"><span class="yr">2024</span> — Soroban goes live. Unlimited buttons. Build anything.</div>
-            </div>
-            <p class="rv" style="font-family: var(--font-mono); font-size: var(--small-size); color: var(--dim); margin-top: var(--gap);">
-                The same pattern Nick Szabo saw in a vending machine — now running globally, in Rust.
-            </p>
-        </div>
-    </section>
-
-    <!-- SLIDE 25: GETTING STARTED -->
-    <section class="slide" data-slide="30">
-        <div class="slide-inner" style="gap: var(--gap);">
-            <h2 class="rv">Getting Started</h2>
-            <div class="machine rv-pop">
-                <div class="name">Resources</div>
-                <div><span class="val">soroban.stellar.org</span></div>
-                <div class="dim">Docs, tutorials, and playground</div>
-                <div style="margin-top: 0.5em;"><span class="val">github.com/stellar/soroban-examples</span></div>
-                <div class="dim">Real contract examples: tokens, swaps, and more</div>
-                <div style="margin-top: 0.5em;"><span class="val">stellar.org/developers</span></div>
-                <div class="dim">SDKs, CLI tools, testnet faucet</div>
-            </div>
-            <div class="code rv" style="margin-top: var(--gap-sm);"><span class="cm"># Install the CLI and create your first contract</span>
-cargo install stellar-cli
-stellar contract init my-first-machine
-cd my-first-machine &amp;&amp; cargo build --target wasm32-unknown-unknown</div>
-        </div>
-    </section>
-
-    <!-- SLIDE 26: QUESTIONS -->
-    <section class="slide q-slide" data-slide="31">
+    <!-- SLIDE: GETTING STARTED -->
+    <section class="slide q-slide" data-slide="24">
         <div class="slide-inner">
             <h1 class="rv">Questions?</h1>
-            <p class="rv">Nothing is too basic. If something didn't make sense, ask about it.</p>
+            <p class="rv"><span class="accent">developers.stellar.org</span></p>
         </div>
     </section>
 
@@ -1812,94 +1824,73 @@ cd my-first-machine &amp;&amp; cargo build --target wasm32-unknown-unknown</div>
             "...vending machines. I expect most of us have used a vending machine at least once in our lives. Has anyone never used a vending machine? Okay, what about a parking meter? Parking meters are a form of vending machine. Lets relive the experience of using an average vending machine.",
 
             // 2: Step 1 — SELECT
-            "You walk up and look at the vending machine. You interact with the vending machine, choosing the item B3.",
+            "Step 1: We walk up to the vending machine. We look at what the options are. We decide what product we'll purchase, or swap, for the money we have. We select the product.",
 
             // 3: Step 2 — PRICE
-            "Step two: the machine tells you the price. Two dollars. It's well understood that if the machine says $2, it will only charge me $2. There are rules we expect the machine to follow. We don't truly know if it will, but we assume it will.",
+            "Step 2: The machine tells us the price. It's going to tell you how much money you need to give the machine for the machine to give you the product you asked for. In this case two dollars. As a user of a vending machine it's well understood at this point that if the machine says $2, it will charge me $2. There are rules we expect the machine to follow. We don't truly know if it will, but we assume it will.",
 
             // 4: Step 3 — PAY
-            "Step three: you pay. You insert the exact amount. Money goes in. At this point, you've committed, but you haven't gotten anything yet.",
+            "Step 3: We pay. We insert the exact amount, or we insert more and expect change. Money goes in. At this point, you've committed, but you haven't gotten anything yet.",
 
             // 5: Step 4 — RECEIVE
-            "Step four: the machine delivers. No cashier decided whether you deserve the soda. No one can stop it. The mechanism — the rules — enforce themselves. That's the key insight.",
+            "Step 4: The machine executes our request and completes the swap. This process was us and the machine. When we use a vending machine there's no cashier, no negotiation, just the machine following a set of rules. So what does this have to do with smart contracts...",
 
-            // 6: A Vending Machine Is an Agreement
-            "A vending machine is really an agreement encoded in hardware. Gears, springs, coin mechanisms — all enforcing the rule: right money in, product out. No middleman. What if we could put this same pattern on a computer network?",
+            // 6: The Ancestor of Smart Contracts
+            "So what does this have to do with smart contracts... Well in 1994, a computer scientist Nick Szabo first described the concept of smart contracts. He envisioned what smart contracts were, he used the vending machine as an example of a primitive smart contract. The idea of a smart contract is self-enforcing logic embedded into technology. That logic would enforce the rules by which it operated and eliminate the need for trust between parties. He coined the term 'smart contract' more than a decade before Bitcoin and Ethereum were created, and he wasn't talking blockchains, he was talking more broadly about how they would show up in technology, but the ideas were much the same. Today when someone says smart contracts they're almost exclusively talking about smart contracts on blockchains.",
 
-            // 7: The Ancestor of Smart Contracts
-            "In 1994, a computer scientist named Nick Szabo looked at vending machines and saw something deeper. He called them the ancestor of smart contracts. He coined the term 'smart contract' — fourteen years before Bitcoin, and even more before Ethereum.",
+            // 7: What Is a Smart Contract?
+            "So what is a smart contract? It's an agreement, a software program, a set of rules, that enforces itself — take the vending machine, remove the physical hardware, keep only the logic, and put it on a decentralized network, where anyone anywhere can use it. That's what we mean by smart contract today. The experience someone has using it fits a similar flow to vending machines too.",
 
-            // 8: What Is a Smart Contract?
-            "So what is a smart contract? Take the vending machine pattern — an agreement that enforces itself — remove the physical machine, keep only the logic, and put it on a decentralized network. Now anyone, anywhere can use it. That's a smart contract.",
+            // 8: Calling a Contract — Identify
+            "Step 1: You identify the contract you want to use and what you want to do with it. You find a financial product — a swap, a pool, a token — and you look at what things you can do with it. Typically this experience is via a web application, but in these slides we're going just one layer beneath the typical UI.",
 
-            // 9: Calling a Contract — Identify
-            "So how do you actually use a smart contract? Same four steps. First, you identify the contract you want to use. You find a financial product — a swap, a pool, a token — and you look at its functions. What can it do?",
+            // 9: Calling a Contract — Simulate
+            "Step 2: You simulate. You ask the contract: if I call swap with 100 USDC, what will I get back? The contract tells you the outcome before you spend a cent. Just like reading the price on the physical display.",
 
-            // 10: Calling a Contract — Simulate
-            "Before you commit anything, you simulate. You ask the contract: if I call swap with 100 USDC, what will I get back? The contract tells you the outcome before you spend a cent. Just like reading the price on the display.",
+            // 10: Calling a Contract — Submit
+            "Step 3: Now you submit the transaction. You sign it with your key and send it to the network. This is the moment you commit to paying — your USDC is on the line.",
 
-            // 11: Calling a Contract — Submit
-            "Now you submit the transaction. You sign it with your key and send it to the network. This is the moment you commit to paying — your USDC is on the line.",
+            // 11: Calling a Contract — Execute
+            "Step 4: The contract executes. The network runs the code, moves the tokens, and hopefully you get the outcome you expected. The contracts behaviour is self-enforced. There's no person in the flow who decided whether to approve it. The code ran, the rules were followed, and the result is final.",
 
-            // 12: Calling a Contract — Execute
-            "The contract executes. The network runs the code, moves the tokens, and hopefully you get the outcome you expected. No middleman decided whether to approve it. The code ran, the rules were followed, and the result is final.",
+            // 12: The Stellar Network
+            "So how do smart contracts relate to Stellar? Stellar supports smart contracts. Founded in 2014, Stellar focused on payments and financial access. Fast settlement, fraction-of-a-penny fees. When most other blockchains were slow and expensive, Stellar was fast and cheap. If we continue the analogies around vending machines you can think of Stellar as a plaza where vending machines get deployed.",
 
-            // 13: The Stellar Network
-            "Stellar is the network we're putting these machines on. Founded in 2014, focused on payments and financial access. Fast settlement, fraction-of-a-penny fees. Think of it as the plaza where our vending machines get deployed.",
+            // 13: Stellar's OG Vending Machine
+            "For its first decade, Stellar had only a few vending machines that in total had 26 built-in operations. Send payments, create offers, manage trust lines. Like a machine with 26 preset buttons. Very useful — but if you wanted something not on the menu, your only option was to propose it and convince the entire network to add a 27th button. Stellar with these 26 buttons technically fits Nick's definition of a smart contract, but in blockchains when we say smart contracts we're referring to computer programs that anyone can deploy. So in 2024...",
 
-            // 14: Stellar's OG Vending Machine
-            "For its first decade, Stellar had 26 built-in operations. Send payments, create offers, manage trust lines. Like a machine with 26 preset buttons. Very useful — but if you wanted something not on the menu, your only option was to propose it and convince the entire network to add a 27th button.",
+            // 14: Soroban: The Programmable Machine
+            "...in 2024, Stellar launched the capability for anyone to deploy their own smart contracts. Stellar's smart contract runtime is called Soroban. On Stellar smart contracts are written in Rust, compiled to WebAssembly. And the launch of smart contracts on Stellar meant that instead of 26 fixed buttons on the network, anyone can now build a machine with any buttons they want and deploy it onto the network.",
 
-            // 15: Soroban: The Programmable Machine
-            "Then in February 2024, Soroban launched. Stellar's smart contract platform. Written in Rust, compiled to WebAssembly. Now instead of 26 fixed buttons, anyone can build a machine with any buttons they want. And the old buttons still work too.",
+            // 15: Was Stellar the First?
+            "Was Stellar the first smart contract supporting blockchain? No. That was Ethereum, launched in 2015. Ethereum really defined the vocabulary and technologies that many blockchains use today, like that smart contracts are programs anyone can deploy.",
 
-            // 16: Was Stellar the First?
-            "Was Stellar the first smart contract platform? No. That was Ethereum, launched in 2015. Vitalik Buterin saw the limitations of Bitcoin's scripting and built a blockchain designed from the ground up for programmable contracts. Ethereum defined the vocabulary — Solidity, the EVM, gas. Since then many others have followed: Solana, Avalanche, Polkadot. Stellar chose to wait, learn from what worked and what didn't, and then build Soroban.",
+            // 16: Lifecycle of a Smart Contract
+            "Before we look at what you can build, here's the lifecycle. You write the contract in Rust with tests. You audit the code — this is critical. Smart contracts have bugs, just like vending machines sometimes get stuck. Most people can't read the code and know for certain it does what it claims. So we patch that gap with auditors, with evidence, with reputation. Trust, but verify. After audit, you compile it into a .wasm file — portable, deterministic bytecode. You upload that .wasm to the Stellar network. Then you deploy an instance — giving it its own address and storage. And finally, people use it — calling its functions, interacting with it, composing their own contracts with it.",
 
             // 17: The Building Blocks
-            "Every Soroban contract is built from the same five primitives. Logic — the rules, what happens when you push a button. Storage — the machine's memory. Auth — require_auth verifies who's pushing the button. Events — receipts, a log of everything that happened. And cross-contract calls — machines can call other machines.",
+            "Every Soroban contract is built from the same five primitives. Logic — the rules, what happens when you push a button. Storage — the machine's memory. Auth — require_auth verifies who's pushing the button. Events — receipts, a log of important happenings. And cross-contract calls — machines can call other machines.",
 
-            // 18: Unlock Any Financial Service
+            // 18: How a Contract Works
+            "Here's what happens inside a contract when someone calls it. Inputs come in — arguments and auth, which verifies who's calling. The contract's logic runs, the rules execute. State gets mutated — the contract's storage is updated. Results come out. And events get published — a log of what happened, like a receipt.",
+
+            // 19: Why Do Smart Contracts Matter?
+            "Why do smart contracts matter? The Stellar Development Foundation's mission is to create equitable access to the global financial system. Smart contracts are a key tool for achieving that mission — they let anyone build financial services that are open, transparent, and accessible to everyone.",
+
+            // 20: Unlock Any Financial Service
             "The whole purpose of smart contracts on Stellar is to unlock and support any financial service. Tokens, swaps, lending, liquidity pools, insurance, programmable payments — anything you can describe with rules, you can build as a contract. Let's look at some examples.",
-
-            // 19: A Basic Swap
-            "Let's build our first real machine. The simplest vending machine: put money in, get a product out. Alice inserts two dollars, presses B4, gets a soda. The machine even makes change. Simple, predictable, atomic.",
-
-            // 20: A Token Machine
-            "Now let's build a machine that creates tokens and tracks who holds them. This one has three buttons: mint, transfer, burn. Think of it like a loyalty points system — a store can mint points, customers can transfer them, and they can burn them for rewards.",
 
             // 21: Tokens Can Represent Anything
             "Same interface, completely different meanings. USDC is real dollars on-chain. LOYALTY is reward points. TICKET is event access. SHARE is ownership with dividends. One machine pattern, infinite use cases. That's the power of a standard interface.",
 
-            // 22: Two Machines, One Swap
-            "Now let's compose machines. Alice wants to swap USDC for EURC. That requires two token machines working together, coordinated by a swap contract. Three contracts, one atomic transaction.",
-
-            // 23: Why Atomic Matters
-            "Why does atomicity matter? In the success case, both sides execute. In the failure case — maybe Bob doesn't have enough EURC — everything rolls back. Alice keeps her USDC. You never end up in a state where one side paid and the other didn't deliver.",
-
-            // 24: A Liquidity Pool
-            "A liquidity pool takes this further. People deposit assets so others can swap against them. Depositors earn fees from every swap. This is how decentralized exchanges work — no order book, no matching engine, just math in a contract.",
-
-            // 25: Beyond Finance
+            // 22: Beyond Finance
             "The pattern isn't limited to finance. Voting — transparent, auditable, on-chain. Supply chain — every step recorded and immutable. Gaming — in-game items as real tokens. Identity — prove things without revealing everything. Anywhere you need rules that enforce themselves.",
 
-            // 26: But Why Does It Work?
-            "As much as blockchains are about removing trust, you can't really escape it. Most of us can't open a vending machine and inspect every tiny moving part to verify it will do exactly what we expect. Same with smart contracts — most people can't read the code and know for certain it does what it claims.",
+            // 23: Recap
+            "So to recap. It all started with a vending machine — rules in hardware, self-enforcing, no middleman. A smart contract is the same idea but in code, running on a network nobody owns. On Stellar, that unlocks every kind of financial service — tokens, swaps, lending, payments, and beyond. All running on the Stellar network, in service of equitable access to the global financial system.",
 
-            // 27: Sometimes the Product Gets Stuck
-            "You've all seen it — the spiral turns, the bag tilts, and it just hangs there. Vending machines have mechanical failures. Smart contracts have bugs. So even though blockchains are decentralized and trustless, the issue of trust remains. We patch it with auditors, evidence, reputation. All those things still play a role. Trust, but verify.",
-
-            // 28: The Pattern Is Always the Same
-            "Every example we've seen is the same pattern. A soda machine, a token, a swap, a pool, voting, identity — they're all just agreements that enforce themselves. Open, transparent, no gatekeepers.",
-
-            // 29: From Gears to Code
-            "The timeline: 1880s vending machines, 1994 Szabo coins the term, 2009 Bitcoin, 2014 Stellar launches with 26 preset operations, and 2024 Soroban goes live with unlimited possibilities. The same pattern Szabo saw in a vending machine — now running globally, in Rust.",
-
-            // 30: Getting Started
-            "If you want to try this, here are the resources. soroban.stellar.org has docs and tutorials. The soroban-examples repo has real contracts you can study. Three commands to get started: install the CLI, init a project, and build.",
-
-            // 31: Questions
-            "That's the talk. Questions? Nothing is too basic. If something didn't click, let's talk through it."
+            // 24: Questions
+            "That's the talk. If you want to get started, developers.stellar.org has everything you need. Questions? Nothing is too basic. If something didn't click, let's talk through it."
         ];
 
         /* ===========================================
